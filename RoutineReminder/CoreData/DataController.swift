@@ -1,5 +1,5 @@
 //
-//  CoreDataManager.swift
+//  DataController.swift
 //  RoutineReminder
 //
 //  Created by Yasser Tamimi on 31/12/2021.
@@ -8,12 +8,12 @@
 import Foundation
 import CoreData
 
-class CoreDataManager {
+class DataController {
     let container: NSPersistentCloudKitContainer
     var context: NSManagedObjectContext { container.viewContext }
 
-    static let preview: CoreDataManager = {
-        let dataController = CoreDataManager(inMemory: true)
+    static let preview: DataController = {
+        let dataController = DataController(inMemory: true)
 
         do {
             try dataController.createSampleData()

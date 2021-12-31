@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-extension CoreDataManager {
+extension DataController {
 
     private func createOneTimeReminder(title: String, time: Date) {
         // one time type

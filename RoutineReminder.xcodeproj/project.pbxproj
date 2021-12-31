@@ -11,11 +11,12 @@
 		3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */; };
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
 		3BF7C208277E6BA1003CA5F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C207277E6BA1003CA5F9 /* Preview Assets.xcassets */; };
-		3BF7C210277E71FF003CA5F9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C20F277E71FF003CA5F9 /* CoreDataManager.swift */; };
+		3BF7C210277E71FF003CA5F9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C20F277E71FF003CA5F9 /* DataController.swift */; };
 		3BF7C214277E77C6003CA5F9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF7C213277E77C6003CA5F9 /* CloudKit.framework */; };
 		3BF7C219277E7C3F003CA5F9 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C217277E7C3F003CA5F9 /* Main.xcdatamodeld */; };
 		3BF7C21B277E86D2003CA5F9 /* Reminder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C21A277E86D2003CA5F9 /* Reminder+Ext.swift */; };
 		3BF7C21E277E9384003CA5F9 /* CoreDataManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C21D277E9384003CA5F9 /* CoreDataManager+Ext.swift */; };
+		3BF7C221277E9E02003CA5F9 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C220277E9E02003CA5F9 /* ReminderListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,13 +25,14 @@
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
 		3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BF7C207277E6BA1003CA5F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3BF7C20F277E71FF003CA5F9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3BF7C20F277E71FF003CA5F9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		3BF7C211277E77B9003CA5F9 /* RoutineReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RoutineReminder.entitlements; sourceTree = "<group>"; };
 		3BF7C213277E77C6003CA5F9 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3BF7C215277E7843003CA5F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3BF7C218277E7C3F003CA5F9 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		3BF7C21A277E86D2003CA5F9 /* Reminder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+Ext.swift"; sourceTree = "<group>"; };
 		3BF7C21D277E9384003CA5F9 /* CoreDataManager+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager+Ext.swift"; sourceTree = "<group>"; };
+		3BF7C220277E9E02003CA5F9 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,11 +68,11 @@
 			isa = PBXGroup;
 			children = (
 				3BF7C21C277E8976003CA5F9 /* Screens */,
-				3BF7C215277E7843003CA5F9 /* Info.plist */,
-				3BF7C211277E77B9003CA5F9 /* RoutineReminder.entitlements */,
 				3BF7C20E277E71E9003CA5F9 /* CoreData */,
 				3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */,
 				3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */,
+				3BF7C215277E7843003CA5F9 /* Info.plist */,
+				3BF7C211277E77B9003CA5F9 /* RoutineReminder.entitlements */,
 				3BF7C206277E6BA1003CA5F9 /* Preview Content */,
 			);
 			path = RoutineReminder;
@@ -87,7 +89,7 @@
 		3BF7C20E277E71E9003CA5F9 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3BF7C20F277E71FF003CA5F9 /* CoreDataManager.swift */,
+				3BF7C20F277E71FF003CA5F9 /* DataController.swift */,
 				3BF7C21D277E9384003CA5F9 /* CoreDataManager+Ext.swift */,
 				3BF7C217277E7C3F003CA5F9 /* Main.xcdatamodeld */,
 				3BF7C21A277E86D2003CA5F9 /* Reminder+Ext.swift */,
@@ -106,9 +108,18 @@
 		3BF7C21C277E8976003CA5F9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */,
+				3BF7C21F277E9DD4003CA5F9 /* ReminderList */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		3BF7C21F277E9DD4003CA5F9 /* ReminderList */ = {
+			isa = PBXGroup;
+			children = (
+				3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */,
+				3BF7C220277E9E02003CA5F9 /* ReminderListViewModel.swift */,
+			);
+			path = ReminderList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +213,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BF7C210277E71FF003CA5F9 /* CoreDataManager.swift in Sources */,
+				3BF7C210277E71FF003CA5F9 /* DataController.swift in Sources */,
 				3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */,
 				3BF7C21B277E86D2003CA5F9 /* Reminder+Ext.swift in Sources */,
 				3BF7C219277E7C3F003CA5F9 /* Main.xcdatamodeld in Sources */,
 				3BF7C21E277E9384003CA5F9 /* CoreDataManager+Ext.swift in Sources */,
 				3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */,
+				3BF7C221277E9E02003CA5F9 /* ReminderListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
