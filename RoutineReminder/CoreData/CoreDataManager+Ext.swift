@@ -10,97 +10,118 @@ import CoreData
 
 extension CoreDataManager {
 
-    func createSampleData() throws {
-        // ONE TIME
+    private func createOneTimeReminder(title: String, time: Date) {
         // one time type
         let oneTime = ReminderTypeOneTime(context: context)
-        oneTime.time = Date()
+        oneTime.time = time
 
         // type
-        let reminderType1 = ReminderType(context: context)
-        reminderType1.oneTime = oneTime
+        let reminderType = ReminderType(context: context)
+        reminderType.oneTime = oneTime
 
         // reminder
-        let reminder1 = Reminder(context: context)
-        reminder1.title = "First Reminder"
-        reminder1.reminderType = reminderType1
+        let reminder = Reminder(context: context)
+        reminder.title = title
+        reminder.reminderType = reminderType
 
-        // HOURLY
+        save()
+    }
+
+    private func createHourlyReminder(title: String, interval: Int) {
         // hourly
         let hourly = ReminderTypeHourly(context: context)
-        hourly.interval = 30 * 60 // 30 minutes
+        hourly.interval = Int64(interval)
 
         // type
-        let reminderType2 = ReminderType(context: context)
-        reminderType2.hourly = hourly
+        let reminderType = ReminderType(context: context)
+        reminderType.hourly = hourly
 
         // reminder
-        let reminder2 = Reminder(context: context)
-        reminder2.title = "Second Reminder"
-        reminder2.reminderType = reminderType2
+        let reminder = Reminder(context: context)
+        reminder.title = title
+        reminder.reminderType = reminderType
 
-        // DAILY
-        // times for daily
-        let time1 = Time(context: context)
-        time1.date = Date()
+        save()
+    }
 
-        let time2 = Time(context: context)
-        time2.date = Date().addingTimeInterval(48 * 3600) // 2 days from now
-
-        // daily
+    func createDailyReminder(title: String, times: [Date]) {
         let daily = ReminderTimeDaily(context: context)
-        daily.addToTimes([time1, time2])
 
-        // type
-        let reminderType3 = ReminderType(context: context)
-        reminderType3.daily = daily
+        // add times
+        for time in times {
+            let newTime = Time(context: context)
+            newTime.date = time
+            daily.addToTimes(newTime)
+        }
+
+        let reminderType = ReminderType(context: context)
+        reminderType.daily = daily
 
         // reminder
-        let reminder3 = Reminder(context: context)
-        reminder3.reminderType = reminderType3
+        let reminder = Reminder(context: context)
+        reminder.title = title
+        reminder.reminderType = reminderType
 
-        // WEEKLY
-        // Create days
-        let day1 = Day(context: context)
-        day1.dayOfTheWeek = 2
-        day1.time = Date()
+        save()
+    }
 
-        let day2 = Day(context: context)
-        day2.dayOfTheWeek = 5
-        day2.time = Date().addingTimeInterval(12 * 60) // 12 hours from now
-
+    func createWeeklyReminder(title: String, daysAndTimes: [Int: Date]) {
         let weekly = ReminderTypeWeekly(context: context)
-        weekly.addToDays([day1, day2])
 
-        // type
-        let reminderType4 = ReminderType(context: context)
-        reminderType4.weekly = weekly
+        for (day, time) in daysAndTimes {
+            let newDay = Day(context: context)
+            newDay.dayOfTheWeek = Int64(day)
+            newDay.time = time
+            weekly.addToDays(newDay)
+        }
+
+        let reminderType = ReminderType(context: context)
+        reminderType.weekly = weekly
 
         // reminder
-        let reminder4 = Reminder(context: context)
-        reminder4.reminderType = reminderType4
+        let reminder = Reminder(context: context)
+        reminder.reminderType = reminderType
+
+        save()
+    }
+
+    func createMonthlyReminder(title: String, times: [Date]) {
+        let monthly = ReminderTypeMonthly(context: context)
+
+        for time in times {
+            let day = Day(context: context)
+            day.time = time
+        }
+
+        let reminderType = ReminderType(context: context)
+        reminderType.monthly = monthly
+
+        // reminder
+        let reminder = Reminder(context: context)
+        reminder.title = title
+        reminder.reminderType = reminderType
+
+        save()
+    }
+
+    func createSampleData() throws {
+        createOneTimeReminder(title: "First Reminder", time: Date())
+        createHourlyReminder(title: "SecondReminder", interval: 30 * 60) // 30 minutes from now
+
+        // times for daily
+        let time1 = Date()
+        let time2 = Date().addingTimeInterval(48 * 3600) // 2 days from now
+        createDailyReminder(title: "Third Reminder", times: [time1, time2])
+
+        // Create days
+        let day1 = Date()
+        let day2 = Date().addingTimeInterval(12 * 60)
+        createWeeklyReminder(title: "Fourth Reminder", daysAndTimes: [2: day1, 5: day2])
 
         // MONTHLY
         // day with time
-        let day3 = Day(context: context)
-        day3.time = Date()
-
-        let day4 = Day(context: context)
-        day4.time = Date().addingTimeInterval(2400 * 3600) // 24 days from now
-
-        // monthly
-        let monthly = ReminderTypeMonthly(context: context)
-        monthly.addToDays([day3, day4])
-
-        // type
-        let reminderType5 = ReminderType(context: context)
-        reminderType5.monthly = monthly
-
-        // reminder
-        let reminder5 = Reminder(context: context)
-        reminder5.reminderType = reminderType5
-
-        save()
-
+        let time3 = Date()
+        let time4 = Date().addingTimeInterval(2400 * 3600) // 24 days from now
+        createMonthlyReminder(title: "Fifth Reminder", times: [time3, time4])
     }
 }

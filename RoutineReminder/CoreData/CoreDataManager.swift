@@ -47,24 +47,19 @@ class CoreDataManager {
         context.delete(object)
     }
 
-    // TODO: implement function //
     // for testing
     func deleteAll() {
-//        let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
-//        let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
-//        _ = try? container.viewContext.execute(batchDeleteRequest1)
-//
-//        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = Project.fetchRequest()
-//        let batchDeleteRequest2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
-//        _ = try? container.viewContext.execute(batchDeleteRequest2)
-//
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Reminder.fetchRequest()
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        _ = try? context.execute(batchDeleteRequest)
+
 //        // we can't simply save() because the batchDeleteRequest runs on the underlying sqlite database
 //        // if we just save(), the data in the UI will not update until we restart the app, but reset() forces
 //        // the viewContext to reload its data from the sqlite database
-//        container.viewContext.reset()
+        container.viewContext.reset()
     }
 
-    // TODO: Check at the end if not needed remove it
+    // NOT USED YET
     func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int {
         (try? context.count(for: fetchRequest)) ?? 0
     }
