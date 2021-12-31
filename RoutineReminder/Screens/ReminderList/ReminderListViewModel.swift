@@ -8,33 +8,52 @@
 import Foundation
 import CoreData
 
-// public typealias Codable = Decodable & Encodable
-class ReminderListViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-    @Published var reminders = [Reminder]()
+extension RemindersListView {
+    class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
+        @Published var reminders = [Reminder]()
 
-    let dataController: DataController
-    let fetchController: NSFetchedResultsController<Reminder>
+        let dataController: DataController
+        let fetchController: NSFetchedResultsController<Reminder>
 
-    init(dataController: DataController) {
-        self.dataController = dataController
+        init(dataController: DataController) {
+            self.dataController = dataController
 
-        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetchRequest()
-        let context = dataController.context
+            let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Reminder.title, ascending: true)]
 
-        fetchController = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
+            let context = dataController.context
 
-        super.init()
-        fetchController.delegate = self
-    }
+            fetchController = NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
 
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        if let newReminders = controller.fetchedObjects as? [Reminder] {
-            reminders = newReminders
+            super.init()
+            fetchController.delegate = self
+            getProjects()
+        }
+
+        func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            if let newReminders = controller.fetchedObjects as? [Reminder] {
+                reminders = newReminders
+            }
+        }
+
+        // for testing
+        func generateSampleData() {
+            dataController.deleteAll()
+            try? dataController.createSampleData()
+        }
+
+        func getProjects() {
+            do {
+                try fetchController.performFetch()
+                reminders = fetchController.fetchedObjects ?? []
+            } catch {
+                print("🔥 Error fetching results \(error)")
+            }
         }
     }
 }

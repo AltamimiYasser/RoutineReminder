@@ -24,6 +24,7 @@ extension DataController {
         reminder.title = title
         reminder.reminderType = reminderType
 
+        reminder.objectWillChange.send()
         save()
     }
 
@@ -80,6 +81,7 @@ extension DataController {
 
         // reminder
         let reminder = Reminder(context: context)
+        reminder.title = title
         reminder.reminderType = reminderType
 
         save()

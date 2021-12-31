@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct RemindersListView: View {
+    @StateObject var viewModel: ViewModel
+
+    init(dataController: DataController) {
+        let viewModel = ViewModel(dataController: dataController)
+        _viewModel = .init(wrappedValue: viewModel)
+    }
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            List(viewModel.reminders) { reminder in
+                Text(reminder.reminderTitle)
+            }
+            HStack {
+                Button("Generate Sample Data", action: viewModel.generateSampleData)
+            }
+        }
     }
 }
 
-struct ReminderListView_Previews: PreviewProvider {
+struct RemindersListView_Previews: PreviewProvider {
     static var previews: some View {
-        RemindersListView()
+        RemindersListView(dataController: DataController.preview)
     }
 }
