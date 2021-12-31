@@ -27,12 +27,12 @@
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReminderType" inverseName="hourly" inverseEntity="ReminderType"/>
     </entity>
     <entity name="ReminderTypeMonthly" representedClassName="ReminderTypeMonthly" syncable="YES" codeGenerationType="class">
-        <relationship name="days" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="monthly" inverseEntity="Day"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="monthly" inverseEntity="Day"/>
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReminderType" inverseName="monthly" inverseEntity="ReminderType"/>
     </entity>
     <entity name="ReminderTypeOneTime" representedClassName="ReminderTypeOneTime" syncable="YES" codeGenerationType="class">
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReminderType" inverseName="oneTime" inverseEntity="ReminderType"/>
-        <relationship name="time" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Time" inverseName="statics" inverseEntity="Time"/>
     </entity>
     <entity name="ReminderTypeWeekly" representedClassName="ReminderTypeWeekly" syncable="YES" codeGenerationType="class">
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Day" inverseName="weekly" inverseEntity="Day"/>
@@ -41,11 +41,10 @@
     <entity name="Time" representedClassName="Time" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="daily" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReminderTimeDaily" inverseName="times" inverseEntity="ReminderTimeDaily"/>
-        <relationship name="statics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReminderTypeOneTime" inverseName="time" inverseEntity="ReminderTypeOneTime"/>
     </entity>
     <elements>
         <element name="Reminder" positionX="-569.81640625" positionY="-105.2578125" width="128" height="59"/>
-        <element name="Time" positionX="-420.76953125" positionY="229.59765625" width="128" height="88"/>
+        <element name="Time" positionX="-420.76953125" positionY="229.59765625" width="128" height="73"/>
         <element name="Day" positionX="-432.80078125" positionY="103.85546875" width="128" height="103"/>
         <element name="ReminderType" positionX="-372.921875" positionY="-58.8359375" width="128" height="133"/>
         <element name="ReminderTypeOneTime" positionX="-81.73046875" positionY="74.4921875" width="128" height="73"/>

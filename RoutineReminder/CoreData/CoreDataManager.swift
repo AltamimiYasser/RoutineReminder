@@ -37,18 +37,6 @@ class CoreDataManager {
         }
     }
 
-//  TODO: Create Sample Data
-    func createSampleData() throws {
-//        let viewContext = container.viewContext
-//
-//        for counter in 0 ..< 5 {
-//            for counter in 0 ..< 10 {
-//
-//            }
-//        }
-//        try context.save()
-    }
-
     func save() {
         if context.hasChanges {
             try? context.save()

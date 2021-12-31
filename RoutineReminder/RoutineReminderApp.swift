@@ -11,7 +11,7 @@ import SwiftUI
 struct RoutineReminderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RemindersListView()
         }
     }
 }
