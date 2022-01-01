@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3B0DD7402780E31700A1591C /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD73F2780E31700A1591C /* Int+Ext.swift */; };
+		3B0DD74327810C1900A1591C /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74227810C1900A1591C /* NotificationsManager.swift */; };
+		3B0DD74627810ECE00A1591C /* InfoOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74527810ECE00A1591C /* InfoOverlayView.swift */; };
+		3B0DD74827810FAF00A1591C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74727810FAF00A1591C /* HomeView.swift */; };
 		3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */; };
 		3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */; };
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
@@ -22,13 +25,15 @@
 
 /* Begin PBXFileReference section */
 		3B0DD73F2780E31700A1591C /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		3B0DD74227810C1900A1591C /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		3B0DD74527810ECE00A1591C /* InfoOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOverlayView.swift; sourceTree = "<group>"; };
+		3B0DD74727810FAF00A1591C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3BF7C1FD277E6BA0003CA5F9 /* RoutineReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutineReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineReminderApp.swift; sourceTree = "<group>"; };
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
 		3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BF7C207277E6BA1003CA5F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3BF7C20F277E71FF003CA5F9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		3BF7C211277E77B9003CA5F9 /* RoutineReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RoutineReminder.entitlements; sourceTree = "<group>"; };
 		3BF7C213277E77C6003CA5F9 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		3BF7C215277E7843003CA5F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3BF7C218277E7C3F003CA5F9 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
@@ -57,6 +62,14 @@
 			path = Ext;
 			sourceTree = "<group>";
 		};
+		3B0DD74427810EB500A1591C /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				3B0DD74527810ECE00A1591C /* InfoOverlayView.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
 		3BF7C1F4277E6BA0003CA5F9 = {
 			isa = PBXGroup;
 			children = (
@@ -77,14 +90,15 @@
 		3BF7C1FF277E6BA0003CA5F9 /* RoutineReminder */ = {
 			isa = PBXGroup;
 			children = (
+				3B0DD74427810EB500A1591C /* UIComponents */,
 				3B0DD7412780E34B00A1591C /* Ext */,
-				3BF7C21C277E8976003CA5F9 /* Screens */,
 				3BF7C20E277E71E9003CA5F9 /* CoreData */,
+				3BF7C21C277E8976003CA5F9 /* Screens */,
 				3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */,
 				3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */,
 				3BF7C215277E7843003CA5F9 /* Info.plist */,
-				3BF7C211277E77B9003CA5F9 /* RoutineReminder.entitlements */,
 				3BF7C206277E6BA1003CA5F9 /* Preview Content */,
+				3B0DD74227810C1900A1591C /* NotificationsManager.swift */,
 			);
 			path = RoutineReminder;
 			sourceTree = "<group>";
@@ -120,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				3BF7C21F277E9DD4003CA5F9 /* ReminderList */,
+				3B0DD74727810FAF00A1591C /* HomeView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -225,10 +240,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF7C210277E71FF003CA5F9 /* DataController.swift in Sources */,
+				3B0DD74627810ECE00A1591C /* InfoOverlayView.swift in Sources */,
 				3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */,
 				3BF7C21B277E86D2003CA5F9 /* Reminder+Ext.swift in Sources */,
 				3BF7C219277E7C3F003CA5F9 /* Main.xcdatamodeld in Sources */,
+				3B0DD74827810FAF00A1591C /* HomeView.swift in Sources */,
 				3BF7C21E277E9384003CA5F9 /* CoreDataManager+Ext.swift in Sources */,
+				3B0DD74327810C1900A1591C /* NotificationsManager.swift in Sources */,
 				3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */,
 				3BF7C221277E9E02003CA5F9 /* ReminderListViewModel.swift in Sources */,
 				3B0DD7402780E31700A1591C /* Int+Ext.swift in Sources */,

@@ -12,7 +12,15 @@ struct RoutineReminderApp: App {
     private let dataController = DataController()
     var body: some Scene {
         WindowGroup {
-            RemindersListView(dataController: dataController)
+            HomeView(dataController: dataController)
+                .onReceive(
+                    NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
+                    perform: save
+                )
         }
+    }
+
+    private func save(_: Notification) {
+        dataController.save()
     }
 }
