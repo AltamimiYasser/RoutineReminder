@@ -10,7 +10,15 @@ import CoreData
 
 extension DataController {
 
-    private func createOneTimeReminder(title: String, time: Date) {
+    private func createReminder(withTitle title: String, type: ReminderType) -> Reminder {
+        let reminder = Reminder(context: context)
+        reminder.title = title
+        reminder.reminderType = type
+        reminder.creationDate = Date()
+        return reminder
+    }
+
+    func createOneTimeReminder(title: String, time: Date) {
         let oneTime = ReminderTypeOneTime(context: context)
         oneTime.time = time
 
@@ -19,15 +27,11 @@ extension DataController {
         reminderType.oneTime = oneTime
 
         // reminder
-        let reminder = Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = reminderType
-
-        reminder.objectWillChange.send()
+        _ = createReminder(withTitle: title, type: reminderType)
         save()
     }
 
-    private func createHourlyReminder(title: String, interval: Int) {
+    func createHourlyReminder(title: String, interval: Int) {
         let hourly = ReminderTypeHourly(context: context)
         hourly.interval = Int64(interval)
 
@@ -36,10 +40,7 @@ extension DataController {
         reminderType.hourly = hourly
 
         // reminder
-        let reminder = Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = reminderType
-
+        _ = createReminder(withTitle: title, type: reminderType)
         save()
     }
 
@@ -57,10 +58,7 @@ extension DataController {
         reminderType.daily = daily
 
         // reminder
-        let reminder = Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = reminderType
-
+        _ = createReminder(withTitle: title, type: reminderType)
         save()
     }
 
@@ -86,10 +84,7 @@ extension DataController {
         reminderType.weekly = weekly
 
         // reminder
-        let reminder = Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = reminderType
-
+        _ = createReminder(withTitle: title, type: reminderType)
         save()
     }
 
@@ -114,10 +109,7 @@ extension DataController {
         reminderType.monthly = monthly
 
         // reminder
-        let reminder = Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = reminderType
-
+        _ = createReminder(withTitle: title, type: reminderType)
         save()
     }
 

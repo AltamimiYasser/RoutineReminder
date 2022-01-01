@@ -23,9 +23,9 @@ struct InfoOverlayView: View {
                 action()
             } label: {
                 Label(buttonTitle, systemImage: systemImageName)
+                    .font(.title)
             }
             .padding()
-            .background(Color(.systemGray5))
             .cornerRadius(5)
         }
         .padding()

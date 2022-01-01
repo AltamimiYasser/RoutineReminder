@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RemindersListView: View {
     @StateObject var viewModel: ViewModel
+    @State private var showNewReminderSheet = false
 
     init(dataController: DataController) {
         let viewModel = ViewModel(dataController: dataController)
@@ -22,6 +23,21 @@ struct RemindersListView: View {
             }
             HStack {
                 Button("Generate Sample Data", action: viewModel.generateSampleData)
+                Button("Delete All", action: viewModel.deleteAll)
+            }
+        }
+        .overlay(overLay)
+    }
+
+    private var overLay: some View {
+        Group {
+            if viewModel.reminders.isEmpty {
+                InfoOverlayView(
+                    infoMessage: "No Reminders Yet",
+                    buttonTitle: "Add",
+                    systemImageName: "plus.circle",
+                    action: { showNewReminderSheet.toggle() }
+                )
             }
         }
     }

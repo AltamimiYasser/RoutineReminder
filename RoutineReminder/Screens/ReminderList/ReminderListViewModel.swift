@@ -19,7 +19,7 @@ extension RemindersListView {
             self.dataController = dataController
 
             let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetchRequest()
-            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Reminder.title, ascending: true)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Reminder.creationDate, ascending: true)]
 
             let context = dataController.context
 
@@ -45,6 +45,11 @@ extension RemindersListView {
         func generateSampleData() {
             dataController.deleteAll()
             try? dataController.createSampleData()
+        }
+
+        // for testing
+        func deleteAll() {
+            dataController.deleteAll()
         }
 
         func getProjects() {
