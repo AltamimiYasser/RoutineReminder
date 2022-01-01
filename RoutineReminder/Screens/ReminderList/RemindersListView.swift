@@ -18,8 +18,13 @@ struct RemindersListView: View {
 
     var body: some View {
         VStack {
-            List(viewModel.reminders) { reminder in
-                Text(reminder.reminderTitle)
+            List {
+                ForEach(viewModel.reminders) { reminder in
+                    Text(reminder.reminderTitle)
+                }
+                .onDelete { offsets in
+                    viewModel.delete(offsets)
+                }
             }
             HStack {
                 Button("Generate Sample Data", action: viewModel.generateSampleData)

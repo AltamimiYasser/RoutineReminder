@@ -62,3 +62,14 @@ extension RemindersListView {
         }
     }
 }
+
+// MARK: - User Intent(s)
+extension RemindersListView.ViewModel {
+    func delete(_ offsets: IndexSet) {
+        for offset in offsets {
+            let reminder = reminders[offset]
+            dataController.delete(reminder)
+        }
+        dataController.save()
+    }
+}
