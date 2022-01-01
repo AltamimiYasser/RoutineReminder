@@ -12,8 +12,8 @@ extension RemindersListView {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
         @Published var reminders = [Reminder]()
 
-        let dataController: DataController
-        let fetchController: NSFetchedResultsController<Reminder>
+        private let dataController: DataController
+        private let fetchController: NSFetchedResultsController<Reminder>
 
         init(dataController: DataController) {
             self.dataController = dataController
@@ -52,7 +52,7 @@ extension RemindersListView {
             dataController.deleteAll()
         }
 
-        func getProjects() {
+        private func getProjects() {
             do {
                 try fetchController.performFetch()
                 reminders = fetchController.fetchedObjects ?? []

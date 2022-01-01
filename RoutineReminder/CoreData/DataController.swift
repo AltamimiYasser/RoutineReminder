@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class DataController {
-    let container: NSPersistentCloudKitContainer
+    private let container: NSPersistentCloudKitContainer
     var context: NSManagedObjectContext { container.viewContext }
 
     static let preview: DataController = {

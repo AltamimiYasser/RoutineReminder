@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    let dataController: DataController
+    private let dataController: DataController
 
     @StateObject private var notificationManager = NotificationManager()
 

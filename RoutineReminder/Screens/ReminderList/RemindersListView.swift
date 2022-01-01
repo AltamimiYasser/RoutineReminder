@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RemindersListView: View {
-    @StateObject var viewModel: ViewModel
+    @StateObject private var viewModel: ViewModel
     @State private var showNewReminderSheet = false
 
     init(dataController: DataController) {
