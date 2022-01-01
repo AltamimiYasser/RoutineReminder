@@ -22,9 +22,7 @@ struct RemindersListView: View {
                 ForEach(viewModel.reminders) { reminder in
                     Text(reminder.reminderTitle)
                 }
-                .onDelete { offsets in
-                    viewModel.delete(offsets)
-                }
+                .onDelete(perform: viewModel.delete)
             }
             HStack {
                 Button("Generate Sample Data", action: viewModel.generateSampleData)
