@@ -11,7 +11,6 @@ import CoreData
 extension DataController {
 
     private func createOneTimeReminder(title: String, time: Date) {
-        // one time type
         let oneTime = ReminderTypeOneTime(context: context)
         oneTime.time = time
 
@@ -29,7 +28,6 @@ extension DataController {
     }
 
     private func createHourlyReminder(title: String, interval: Int) {
-        // hourly
         let hourly = ReminderTypeHourly(context: context)
         hourly.interval = Int64(interval)
 
@@ -66,16 +64,24 @@ extension DataController {
         save()
     }
 
-    func createWeeklyReminder(title: String, daysAndTimes: [Int: Date]) {
+    // In weekly Reminder we link the dayOfTheWeek field to the times
+    func createWeeklyReminder(title: String, daysAndTimes: [Int: [Date]]) { // [dayOfWeek:[times]]
         let weekly = ReminderTypeWeekly(context: context)
 
-        for (day, time) in daysAndTimes {
+        for (day, times) in daysAndTimes {
             let newDay = Day(context: context)
             newDay.dayOfTheWeek = Int64(day)
-            newDay.time = time
+
+            for time in times {
+                let newTime = Time(context: context)
+                newTime.date = time
+                newDay.addToTimes(newTime)
+            }
+
             weekly.addToDays(newDay)
         }
 
+        // type
         let reminderType = ReminderType(context: context)
         reminderType.weekly = weekly
 
@@ -87,12 +93,21 @@ extension DataController {
         save()
     }
 
-    func createMonthlyReminder(title: String, times: [Date]) {
+    // In Monthly Reminder we link the date field to the times
+    func createMonthlyReminder(title: String, times: [Date: [Date]]) { // [date:[times]]
         let monthly = ReminderTypeMonthly(context: context)
 
-        for time in times {
-            let day = Day(context: context)
-            day.time = time
+        // we don't need day of the week so we keep it at nil
+        for (day, times) in times {
+            // for everyday create a day object
+            let newDay = Day(context: context)
+            newDay.date = day
+            for time in times {
+            // for every time create a time
+                let newTime = Time(context: context)
+                newTime.date = time
+                newDay.addToTimes(newTime)
+            }
         }
 
         let reminderType = ReminderType(context: context)
@@ -115,15 +130,16 @@ extension DataController {
         let time2 = Date().addingTimeInterval(48 * 3600) // 2 days from now
         createDailyReminder(title: "Third Reminder", times: [time1, time2])
 
+        // weekly
         // Create days
-        let day1 = Date()
-        let day2 = Date().addingTimeInterval(12 * 60)
-        createWeeklyReminder(title: "Fourth Reminder", daysAndTimes: [2: day1, 5: day2])
+        let times1 = [Date(), Date().addingTimeInterval(TimeInterval(6.hoursToSeconds()))]
+        let times2 = [Date(), Date().addingTimeInterval(TimeInterval(12.hoursToSeconds()))]
+        createWeeklyReminder(title: "Fourth Reminder", daysAndTimes: [1: times1, 5: times2])
 
         // MONTHLY
         // day with time
-        let time3 = Date()
-        let time4 = Date().addingTimeInterval(2400 * 3600) // 24 days from now
-        createMonthlyReminder(title: "Fifth Reminder", times: [time3, time4])
+        let day1 = Date()
+        let day2 = Date().addingTimeInterval(12 * 60)
+        createMonthlyReminder(title: "Fifth Reminder", times: [day1: times1, day2: times2])
     }
 }
