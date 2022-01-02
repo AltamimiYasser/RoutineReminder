@@ -9,6 +9,7 @@
     </entity>
     <entity name="Reminder" representedClassName="Reminder" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderType" inverseName="reminder" inverseEntity="ReminderType"/>
     </entity>
@@ -47,7 +48,7 @@
     </entity>
     <elements>
         <element name="Day" positionX="-432.80078125" positionY="103.85546875" width="128" height="104"/>
-        <element name="Reminder" positionX="-569.81640625" positionY="-105.2578125" width="128" height="74"/>
+        <element name="Reminder" positionX="-569.81640625" positionY="-105.2578125" width="128" height="89"/>
         <element name="ReminderTimeDaily" positionX="-131.72265625" positionY="-54.421875" width="128" height="73"/>
         <element name="ReminderType" positionX="-372.921875" positionY="-58.8359375" width="128" height="133"/>
         <element name="ReminderTypeHourly" positionX="-197.48046875" positionY="-203.59375" width="128" height="59"/>

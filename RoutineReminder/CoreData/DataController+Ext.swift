@@ -103,6 +103,7 @@ extension DataController {
                 newTime.date = time
                 newDay.addToTimes(newTime)
             }
+            monthly.addToDays(newDay)
         }
 
         let reminderType = ReminderType(context: context)
