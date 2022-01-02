@@ -14,13 +14,18 @@ extension DataController {
         withTitle title: String,
         type: ReminderType,
         reminder: Reminder? = nil
-    ) -> Reminder {
+    ) {
 
-        let reminder = reminder ?? Reminder(context: context)
-        reminder.title = title
-        reminder.reminderType = type
-        reminder.creationDate = Date()
-        return reminder
+        if let reminder = reminder {
+            reminder.title = title
+            reminder.reminderType = type
+        } else {
+            let reminder = Reminder(context: context)
+            reminder.title = title
+            reminder.reminderType = type
+            reminder.creationDate = Date()
+        }
+        save()
     }
 
     func createOrUpdateOneTimeReminder(title: String, time: Date, reminder: Reminder? = nil) {
@@ -32,8 +37,7 @@ extension DataController {
         reminderType.oneTime = oneTime
 
         // reminder
-        _ = createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-        save()
+        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
 
     func createOrUpdateHourlyReminder(title: String, interval: Int, reminder: Reminder? = nil) {
@@ -45,8 +49,7 @@ extension DataController {
         reminderType.hourly = hourly
 
         // reminder
-        _ = createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-        save()
+        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
 
     func createOrUpdateDailyReminder(title: String, times: [Date], reminder: Reminder? = nil) {
@@ -63,8 +66,7 @@ extension DataController {
         reminderType.daily = daily
 
         // reminder
-        _ = createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-        save()
+        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
 
     // In weekly Reminder we link the dayOfTheWeek field to the times
@@ -90,8 +92,7 @@ extension DataController {
         reminderType.weekly = weekly
 
         // reminder
-        _ = createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-        save()
+        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
 
     // In Monthly Reminder we link the date field to the times
@@ -120,8 +121,7 @@ extension DataController {
         reminderType.monthly = monthly
 
         // reminder
-        _ = createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-        save()
+        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
 
     func createSampleData() throws {

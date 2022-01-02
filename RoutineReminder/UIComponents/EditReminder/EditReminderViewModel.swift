@@ -22,20 +22,30 @@ extension EditReminderView {
 
         private var isEditing = false
 
-        @Published var reminder: Reminder
+        @Published var reminder: Reminder?
 
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController
             if reminder != nil {
                 isEditing = true
+                self.reminder = reminder
             }
-            self.reminder = reminder ?? Reminder(context: dataController.context)
+//            self.reminder = reminder ?? Reminder(context: dataController.context)
             self.reminderType = reminder?.type ?? .oneTime(time: Date())
             assignReminderValues()
         }
 
+        func reminderTypeChanged(to newValue: Reminder.TypeOfReminder) {
+                print("🔥 new value is \(newValue)")
+            if case Reminder.TypeOfReminder.oneTime = newValue {
+                repeated = false
+            } else {
+                repeated = true
+            }
+        }
+
         private func assignReminderValues() {
-            self.title = reminder.title ?? ""
+            self.title = reminder?.title ?? ""
             switch reminderType {
 
             case .oneTime(time: let time):
@@ -61,8 +71,9 @@ extension EditReminderView {
         }
 
         func save() {
+            // set all values to nil then create the new edited reminder with the new values
+            reminder?.reminderType = nil
             switch reminderType {
-
             case .oneTime:
                 dataController.createOrUpdateOneTimeReminder(
                     title: title, time: oneTimeTime, reminder: isEditing ? reminder : nil
