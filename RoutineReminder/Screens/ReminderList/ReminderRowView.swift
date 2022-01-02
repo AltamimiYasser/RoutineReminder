@@ -29,9 +29,7 @@ struct ReminderRowView: View {
                 .labelsHidden()
                 .padding(.trailing, 10)
         }
-        .onChange(of: viewModel.isEnabled) { _ in
-            viewModel.save()
-        }
+        .onChange(of: viewModel.isEnabled, perform: viewModel.save)
     }
 
 }
@@ -39,91 +37,88 @@ struct ReminderRowView: View {
 extension ReminderRowView {
     var leftSide: some View {
         Group {
-
-            switch viewModel.reminder.type {
+            switch reminder.type {
             case .oneTime(let time):
-                HStack {
-                    dateViewFor(stringDate: time.getTimeAndDate().time)
-                    dateViewFor(stringDate: time.getTimeAndDate().date)
+                getLeftSideView(subTitle: "One time Reminder") {
+                    HStack {
+                        cardView(withString: time.getTimeAndDate().time)
+                        cardView(withString: time.getTimeAndDate().date)
+                    }
+                    .font(.headline)
                 }
-                .font(.headline)
-                .padding(.horizontal)
 
             case .hourly(let interval):
                 let (hours, minutes) = interval.secondsToHoursAndMinutes()
-                Group {
-                    if hours == 0 {
-                        Text("Repeats every")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                        dateViewFor(stringDate: "\(minutes) minutes")
-                    } else {
-                        Text("Repeats every")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                        dateViewFor(stringDate: "\(hours) hours and \(minutes)")
+                if hours == 0 {
+                    getLeftSideView(subTitle: "Repeats every") {
+                        cardView(withString: "\(minutes) minutes")
                     }
+                } else {
+                    getLeftSideView(subTitle: "Repeats every") {
+                        cardView(withString: "\(hours) hours and \(minutes)")
+                    }
+                    Text("Repeats every")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
                 }
-                .padding(.horizontal)
 
             case .daily(let times):
-                VStack(alignment: .leading) {
-                    Text("Repeats everyday at")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
+                getLeftSideView(subTitle: "Repeats everyday at") {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(times, id: \.self) { time in
-                                dateViewFor(stringDate: time.getTimeAndDate().time)
+                                cardView(withString: time.getTimeAndDate().time)
                             }
                         }
                     }
                 }
-                .padding(.horizontal)
 
             case .weekly(let days):
-                VStack(alignment: .leading) {
-                        Text("Repeats weekly every")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
+                getLeftSideView(subTitle: "Repeats weekly every") {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(days.sorted(by: {$0.key > $1.key}), id: \.key) { day, _ in
-                                dateViewFor(stringDate: Reminder.getWeekDayStr(for: day).short)
+                                cardView(withString: Reminder.getWeekDayStr(for: day).short)
                             }
                         }
                     }
 
                 }
-                .padding(.horizontal)
 
             case .monthly(days: let days):
-                VStack(alignment: .leading) {
-                    Text("Repeats montly every")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
+                getLeftSideView(subTitle: "Repeats monthly every") {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(days.sorted(by: {$0.key > $1.key}), id: \.key) { day, _ in
-                                dateViewFor(stringDate: day.getTimeAndDate().date)
+                                cardView(withString: day.getTimeAndDate().date)
                             }
                         }
                     }
-
                 }
-                .padding(.horizontal)
             }
         }
     }
 
-    func dateViewFor(stringDate: String) -> some View {
-        Text(stringDate)
+    func cardView(withString string: String) -> some View {
+        Text(string)
             .font(.headline)
             .foregroundColor(.white)
             .padding(10)
             .background(.purple)
             .cornerRadius(5)
             .shadow(radius: 8)
+    }
+
+    func getLeftSideView<Content: View>(subTitle: String, @ViewBuilder content: () -> Content) -> some View {
+        Group {
+            VStack(alignment: .leading) {
+                Text(subTitle)
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+                content()
+            }
+            .padding(.horizontal)
+        }
     }
 }
 
