@@ -11,7 +11,7 @@ struct EditReminderView: View {
     @StateObject private var viewModel: ViewModel
 
     init(dataController: DataController, reminder: Reminder?) {
-        let viewModel = ViewModel(dataController: dataController)
+        let viewModel = ViewModel(dataController: dataController, reminder: reminder)
         _viewModel = .init(wrappedValue: viewModel)
     }
 
@@ -21,11 +21,5 @@ struct EditReminderView: View {
                 TextField("Title", text: $viewModel.title)
             }
         }
-    }
-}
-
-struct EditReminderView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditReminderView(dataController: DataController.preview, reminder: Reminder.example)
     }
 }

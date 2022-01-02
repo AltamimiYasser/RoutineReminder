@@ -23,7 +23,7 @@ struct RemindersListView: View {
             List {
                 ForEach(viewModel.reminders) { reminder in
                     NavigationLink {
-                        EmptyView()
+                        EditReminderView(dataController: dataController, reminder: reminder)
                     } label: {
                         ReminderRowView(reminder: reminder, dataController: dataController)
                     }
