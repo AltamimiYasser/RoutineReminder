@@ -73,7 +73,7 @@ extension Reminder {
             return .oneTime(time: time ?? Date())
     }
 
-    enum TypeOfReminder {
+    enum TypeOfReminder: Equatable {
         case oneTime(time: Date)
         case hourly(interval: Int)
         case daily(times: [Date])
