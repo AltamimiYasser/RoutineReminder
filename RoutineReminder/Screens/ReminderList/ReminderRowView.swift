@@ -57,9 +57,6 @@ extension ReminderRowView {
                     getLeftSideView(subTitle: "Repeats every") {
                         cardView(withString: "\(hours) hours and \(minutes)")
                     }
-                    Text("Repeats every")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
                 }
 
             case .daily(let times):

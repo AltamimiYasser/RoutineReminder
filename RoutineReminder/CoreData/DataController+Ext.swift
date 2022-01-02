@@ -116,11 +116,11 @@ extension DataController {
 
     func createSampleData() throws {
         createOneTimeReminder(title: "First Reminder", time: Date())
-        createHourlyReminder(title: "SecondReminder", interval: 30 * 60) // 30 minutes from now
+        createHourlyReminder(title: "SecondReminder", interval: (2.hoursToSeconds()))
 
         // times for daily
         let time1 = Date()
-        let time2 = Date().addingTimeInterval(48 * 3600) // 2 days from now
+        let time2 = Date().addingTimeInterval(TimeInterval(14.hoursToSeconds()))
         createDailyReminder(title: "Third Reminder", times: [time1, time2])
 
         // weekly
@@ -131,8 +131,8 @@ extension DataController {
 
         // MONTHLY
         // day with time
-        let day1 = Date()
-        let day2 = Date().addingTimeInterval(12 * 60)
+        let day1 = Date().addingTimeInterval(TimeInterval(9.daysToSeconds()))
+        let day2 = Date().addingTimeInterval(TimeInterval(22.daysToSeconds()))
         createMonthlyReminder(title: "Fifth Reminder", times: [day1: times1, day2: times2])
     }
 }

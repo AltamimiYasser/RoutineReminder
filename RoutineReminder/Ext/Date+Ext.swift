@@ -11,7 +11,7 @@ extension Date {
     func getTimeAndDate() -> (time: String, date: String) {
         var result = (time: "", date: "")
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = "hh:mm a"
         result.time = formatter.string(from: self)
         formatter.dateFormat = "dd MMMM"
         result.date = formatter.string(from: self)

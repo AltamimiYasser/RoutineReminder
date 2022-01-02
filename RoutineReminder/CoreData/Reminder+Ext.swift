@@ -24,7 +24,9 @@ extension Reminder {
             let times = reminderType?.daily?.times
             var arrTimes = [Date]()
             for time in times ?? [] {
-                arrTimes.append(time as? Date ?? Date())
+                let newTime = time as? Time
+                let time = newTime?.date ?? Date() as Date
+                arrTimes.append(time)
             }
             return .daily(times: arrTimes)
         }
@@ -67,7 +69,8 @@ extension Reminder {
             return .monthly(days: arrTimes)
         }
 
-        return .oneTime(time: reminderType?.oneTime?.time ?? Date())
+        let time = reminderType?.oneTime?.time
+            return .oneTime(time: time ?? Date())
     }
 
     enum TypeOfReminder {
