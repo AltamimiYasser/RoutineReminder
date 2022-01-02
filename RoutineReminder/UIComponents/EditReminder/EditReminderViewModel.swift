@@ -61,24 +61,30 @@ extension EditReminderView {
         }
 
         func save() {
-            if !isEditing {
-                switch reminderType {
+            switch reminderType {
 
-                case .oneTime:
-                    dataController.createOneTimeReminder(title: title, time: oneTimeTime)
-                case .hourly:
-                    dataController.createHourlyReminder(title: title, interval: hourlyTimeInterval)
-                case .daily:
-                    dataController.createDailyReminder(title: title, times: dailyTimes)
-                case .weekly:
-                    dataController.createWeeklyReminder(title: title, daysAndTimes: weeklyDays)
-                case .monthly:
-                    dataController.createMonthlyReminder(title: title, times: monthlyDays)
-                }
-            } else {
-                
+            case .oneTime:
+                dataController.createOrUpdateOneTimeReminder(
+                    title: title, time: oneTimeTime, reminder: isEditing ? reminder : nil
+                )
+            case .hourly:
+                dataController.createOrUpdateHourlyReminder(
+                    title: title, interval: hourlyTimeInterval, reminder: isEditing ? reminder : nil
+                )
+            case .daily:
+                dataController.createOrUpdateDailyReminder(
+                    title: title, times: dailyTimes, reminder: isEditing ? reminder : nil)
+
+            case .weekly:
+                dataController.createOrUpdateWeeklyReminder(
+                    title: title, daysAndTimes: weeklyDays, reminder: isEditing ? reminder : nil
+                )
+            case .monthly:
+                dataController.createOrUpdateMonthlyReminder(
+                    title: title, times: monthlyDays, reminder: isEditing ? reminder : nil
+                )
             }
-            dataController.save()
+
         }
     }
 
