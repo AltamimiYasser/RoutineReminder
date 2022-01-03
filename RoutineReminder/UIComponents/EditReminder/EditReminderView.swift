@@ -91,22 +91,17 @@ struct EditReminderView: View {
                     }
 
                 case .weekly:
-                    // page to edit weekly reminders
-                    VStack(alignment: .leading, spacing: 20) {
-                        List {
-                            ForEach(viewModel.mappedWeekDays, id: \.self) { values in
-                                ForEach(Array(values), id: \.key) { day, times in
-                                    NavigationLink {
-                                        EmptyView()
-                                    } label: {
-                                        Text(day)
-                                            .font(.headline)
-                                    }
-                                    
+                    List {
+                        ForEach(viewModel.mappedWeekDays, id: \.dayOfTheWeek) { day in
+                            NavigationLink {
+                                Text(day.dayOfTheWeek) //TODO:
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(day.dayOfTheWeek)
                                     ScrollView(.horizontal) {
                                         HStack {
-                                            ForEach(times, id: \.self) { time in
-                                                SmallCardView(string: time)
+                                            ForEach(day.times.indices, id: \.self) { index in
+                                                SmallCardView(string: day.times[index])
                                             }
                                         }
                                     }
@@ -116,7 +111,6 @@ struct EditReminderView: View {
                     }
                 case .monthly:
                     Text("monthly")
-
                 }
             }
         }
@@ -127,7 +121,7 @@ struct EditReminderView: View {
         }
         .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
         .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
-        .onDisappear(perform: viewModel.save) // TODO: - change or find solution to be able to have navigation without performing the save function
+        .onDisappear(perform: viewModel.save) // TODO: Any navigation link will pop back
     }
 
     private func delete(at offsets: IndexSet) {

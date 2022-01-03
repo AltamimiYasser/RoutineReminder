@@ -31,8 +31,11 @@ extension EditReminderView {
 
         private var isEditing = false
 
-        var mappedWeekDays: [[String: [String]]] {
-            weeklyDays.map { [Reminder.getWeekDayStr(for: $0.key).full: $0.value.map({ $0.getTimeAndDate().time })] }
+        var mappedWeekDays: [WeeklyReminder] {
+            weeklyDays.map {
+                WeeklyReminder(dayOfTheWeek: Reminder.getWeekDayStr(for: $0.key).full,
+                               times: $0.value.map({ $0.getTimeAndDate().time }))
+            }
         }
 
         init(dataController: DataController, reminder: Reminder? = nil) {
@@ -117,8 +120,11 @@ extension EditReminderView {
                     title: title, times: monthlyDays, reminder: isEditing ? reminder : nil
                 )
             }
-
         }
     }
-
+    struct WeeklyReminder: Identifiable {
+        var id = UUID()
+        var dayOfTheWeek: String
+        var times: [String]
+    }
 }
