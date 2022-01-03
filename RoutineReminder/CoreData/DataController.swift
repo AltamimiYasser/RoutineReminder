@@ -32,7 +32,7 @@ class DataController {
 
         container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Error loading stores. \(error.localizedDescription)")
+                fatalError("Error loading stores. \(error)")
             }
         }
     }
@@ -47,8 +47,12 @@ class DataController {
         }
     }
 
-    func delete(_ object: NSManagedObject) {
-        context.delete(object)
+    func delete(_ object: NSManagedObject?) {
+        if let object = object {
+            context.delete(object)
+        } else {
+            print("🔥 object \(String(describing: object?.entity.name)) doesn't exists")
+        }
     }
 
     // for testing

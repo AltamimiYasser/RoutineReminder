@@ -37,12 +37,12 @@ struct ReminderRowView: View {
 extension ReminderRowView {
     var leftSide: some View {
         Group {
-            switch reminder.type {
+            switch reminder.typeData {
             case .oneTime(let time):
                 getLeftSideView(subTitle: "One time Reminder") {
                     HStack {
-                        cardView(withString: time.getTimeAndDate().time)
                         cardView(withString: time.getTimeAndDate().date)
+                        cardView(withString: time.getTimeAndDate().time)
                     }
                     .font(.headline)
                 }

@@ -36,6 +36,12 @@ extension DataController {
         let reminderType = ReminderType(context: context)
         reminderType.oneTime = oneTime
 
+        // delete everything else
+        delete(reminderType.hourly)
+        delete(reminderType.daily)
+        delete(reminderType.weekly)
+        delete(reminderType.monthly)
+
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
     }
@@ -47,6 +53,12 @@ extension DataController {
         // type
         let reminderType = ReminderType(context: context)
         reminderType.hourly = hourly
+
+        // delete everything else
+        delete(reminderType.oneTime)
+        delete(reminderType.daily)
+        delete(reminderType.weekly)
+        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -64,6 +76,12 @@ extension DataController {
 
         let reminderType = ReminderType(context: context)
         reminderType.daily = daily
+
+        // delete everything else
+        delete(reminderType.oneTime)
+        delete(reminderType.hourly)
+        delete(reminderType.weekly)
+        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -90,6 +108,12 @@ extension DataController {
         // type
         let reminderType = ReminderType(context: context)
         reminderType.weekly = weekly
+
+        // delete everything else
+        delete(reminderType.oneTime)
+        delete(reminderType.hourly)
+        delete(reminderType.daily)
+        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -119,6 +143,12 @@ extension DataController {
 
         let reminderType = ReminderType(context: context)
         reminderType.monthly = monthly
+
+        // delete everything else
+        delete(reminderType.oneTime)
+        delete(reminderType.hourly)
+        delete(reminderType.daily)
+        delete(reminderType.weekly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)

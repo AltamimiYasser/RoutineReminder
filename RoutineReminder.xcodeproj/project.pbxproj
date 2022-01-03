@@ -38,6 +38,7 @@
 		3B0DD74D2781381F00A1591C /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		3B0DD74F27815EEC00A1591C /* EditReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderView.swift; sourceTree = "<group>"; };
 		3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderViewModel.swift; sourceTree = "<group>"; };
+		3B0DD7542782D11500A1591C /* RoutineReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RoutineReminder.entitlements; sourceTree = "<group>"; };
 		3BF7C1FD277E6BA0003CA5F9 /* RoutineReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutineReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineReminderApp.swift; sourceTree = "<group>"; };
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		3BF7C1FF277E6BA0003CA5F9 /* RoutineReminder */ = {
 			isa = PBXGroup;
 			children = (
+				3B0DD7542782D11500A1591C /* RoutineReminder.entitlements */,
 				3B0DD74427810EB500A1591C /* UIComponents */,
 				3B0DD7412780E34B00A1591C /* Ext */,
 				3BF7C20E277E71E9003CA5F9 /* CoreData */,

@@ -12,13 +12,21 @@ extension EditReminderView {
         private let dataController: DataController
 
         @Published var title = ""
-        @Published var reminderType: Reminder.TypeOfReminder = .oneTime(time: Date())
+        @Published private var reminderTypeData: Reminder.TypeOfReminderData = .oneTime(time: Date())
+        @Published var reminderType: Reminder.TypeOfReminder = .oneTime
         @Published var repeated = false
-        @Published var oneTimeTime: Date = Date()
-        @Published var hourlyTimeInterval: Int = 30.minutesToSeconds()
+        @Published var oneTimeTime = Date()
+        @Published private var hourlyTimeInterval = 30.minutesToSeconds()
         @Published var dailyTimes: [Date] = []
         @Published var weeklyDays: [Int: [Date]] = [:]
         @Published var monthlyDays: [Date: [Date]] = [:]
+
+        @Published var timeIntervalHoursPicker = 0
+        @Published var timeIntervalMinutesPicker = 30
+        var minutesPickersRangeMin: Int {
+            if timeIntervalHoursPicker == 0 { return 1 }
+            return 0
+        }
 
         private var isEditing = false
 
@@ -26,27 +34,27 @@ extension EditReminderView {
 
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController
-            if reminder != nil {
+            if let reminder = reminder {
                 isEditing = true
                 self.reminder = reminder
+                self.reminderType = reminder.type
+                self.reminderTypeData = reminder.typeData
             }
-//            self.reminder = reminder ?? Reminder(context: dataController.context)
-            self.reminderType = reminder?.type ?? .oneTime(time: Date())
             assignReminderValues()
+
         }
 
-        func reminderTypeChanged(to newValue: Reminder.TypeOfReminder) {
-                print("🔥 new value is \(newValue)")
-            if case Reminder.TypeOfReminder.oneTime = newValue {
-                repeated = false
+        func repeatedChanged(to newValue: Bool) {
+            if newValue == false {
+                reminderType = .oneTime
             } else {
-                repeated = true
+                reminderType = .hourly
             }
         }
 
         private func assignReminderValues() {
             self.title = reminder?.title ?? ""
-            switch reminderType {
+            switch reminderTypeData {
 
             case .oneTime(time: let time):
                 self.repeated = false
@@ -55,6 +63,9 @@ extension EditReminderView {
             case .hourly(interval: let interval):
                 self.repeated = true
                 self.hourlyTimeInterval = interval
+                let (hours, minutes) = interval.secondsToHoursAndMinutes()
+                self.timeIntervalHoursPicker = hours
+                self.timeIntervalMinutesPicker = minutes
 
             case .daily(times: let times):
                 self.repeated = true
@@ -70,9 +81,17 @@ extension EditReminderView {
             }
         }
 
+        func hoursIntervalChanged(_ newValue: Int) {
+            self.hourlyTimeInterval += newValue.hoursToSeconds()
+        }
+
+        func minutesIntervalChanged(_ newValue: Int) {
+            if timeIntervalHoursPicker == 0 { timeIntervalMinutesPicker = 1}
+            self.hourlyTimeInterval += newValue.minutesToSeconds()
+        }
+
         func save() {
-            // set all values to nil then create the new edited reminder with the new values
-            reminder?.reminderType = nil
+
             switch reminderType {
             case .oneTime:
                 dataController.createOrUpdateOneTimeReminder(

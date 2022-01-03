@@ -8,7 +8,7 @@
         <relationship name="weekly" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReminderTypeWeekly" inverseName="days" inverseEntity="ReminderTypeWeekly"/>
     </entity>
     <entity name="Reminder" representedClassName="Reminder" syncable="YES" codeGenerationType="class">
-        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderType" inverseName="reminder" inverseEntity="ReminderType"/>

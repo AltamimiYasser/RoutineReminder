@@ -10,8 +10,15 @@ import CoreData
 
 extension Reminder {
     var reminderTitle: String { title ?? "No name provided"}
+    var type: TypeOfReminder {
+        if reminderType?.hourly != nil { return .hourly}
+        if reminderType?.daily != nil { return .daily}
+        if reminderType?.weekly != nil { return .weekly}
+        if reminderType?.monthly != nil { return .monthly}
+        return .oneTime
+    }
 
-    var type: Reminder.TypeOfReminder {
+    var typeData: Reminder.TypeOfReminderData {
         if reminderType?.hourly != nil {
             return .hourly(
                 interval: Int(
@@ -73,8 +80,17 @@ extension Reminder {
             return .oneTime(time: time ?? Date())
     }
 
-    enum TypeOfReminder: CaseIterable, Equatable, Hashable {
-        static var allCases: [Reminder.TypeOfReminder] {
+    enum TypeOfReminder: String, CaseIterable {
+        case oneTime = "One Time"
+        case hourly = "Hourly"
+        case daily = "Daily"
+        case weekly = "Weekly"
+        case monthly = "Montyly"
+    }
+
+    enum TypeOfReminderData: CaseIterable, Equatable, Identifiable, Hashable {
+        var id: TypeOfReminderData { self }
+        static var allCases: [Reminder.TypeOfReminderData] {
             return [
                 .oneTime(time: Date()),
                 .hourly(interval: 0),
