@@ -41,8 +41,8 @@ extension ReminderRowView {
             case .oneTime(let time):
                 getLeftSideView(subTitle: "One time Reminder") {
                     HStack {
-                        cardView(withString: time.getTimeAndDate().date)
-                        cardView(withString: time.getTimeAndDate().time)
+                        SmallCardView(string: time.getTimeAndDate().date)
+                        SmallCardView(string: time.getTimeAndDate().time)
                     }
                     .font(.headline)
                 }
@@ -51,11 +51,11 @@ extension ReminderRowView {
                 let (hours, minutes) = interval.secondsToHoursAndMinutes()
                 if hours == 0 {
                     getLeftSideView(subTitle: "Repeats every") {
-                        cardView(withString: "\(minutes) minutes")
+                        SmallCardView(string: "\(minutes) minutes")
                     }
                 } else {
                     getLeftSideView(subTitle: "Repeats every") {
-                        cardView(withString: "\(hours) hours and \(minutes)")
+                        SmallCardView(string: "\(hours) hours and \(minutes)")
                     }
                 }
 
@@ -64,7 +64,7 @@ extension ReminderRowView {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(times, id: \.self) { time in
-                                cardView(withString: time.getTimeAndDate().time)
+                                SmallCardView(string: time.getTimeAndDate().time)
                             }
                         }
                     }
@@ -75,7 +75,7 @@ extension ReminderRowView {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(days.sorted(by: {$0.key > $1.key}), id: \.key) { day, _ in
-                                cardView(withString: Reminder.getWeekDayStr(for: day).short)
+                                SmallCardView(string: Reminder.getWeekDayStr(for: day).short)
                             }
                         }
                     }
@@ -87,23 +87,13 @@ extension ReminderRowView {
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(days.sorted(by: {$0.key > $1.key}), id: \.key) { day, _ in
-                                cardView(withString: day.getTimeAndDate().date)
+                                SmallCardView(string: day.getTimeAndDate().date)
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    func cardView(withString string: String) -> some View {
-        Text(string)
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding(10)
-            .background(.purple)
-            .cornerRadius(5)
-            .shadow(radius: 8)
     }
 
     func getLeftSideView<Content: View>(subTitle: String, @ViewBuilder content: () -> Content) -> some View {

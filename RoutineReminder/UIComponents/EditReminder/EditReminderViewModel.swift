@@ -10,6 +10,7 @@ import Foundation
 extension EditReminderView {
     class ViewModel: ObservableObject {
         private let dataController: DataController
+        @Published var reminder: Reminder?
 
         @Published var title = ""
         @Published private var reminderTypeData: Reminder.TypeOfReminderData = .oneTime(time: Date())
@@ -18,7 +19,7 @@ extension EditReminderView {
         @Published var oneTimeTime = Date()
         @Published private var hourlyTimeInterval = 30.minutesToSeconds()
         @Published var dailyTimes: [Date] = []
-        @Published var weeklyDays: [Int: [Date]] = [:]
+        @Published private var weeklyDays: [Int: [Date]] = [:]
         @Published var monthlyDays: [Date: [Date]] = [:]
 
         @Published var timeIntervalHoursPicker = 0
@@ -30,7 +31,9 @@ extension EditReminderView {
 
         private var isEditing = false
 
-        @Published var reminder: Reminder?
+        var mappedWeekDays: [[String: [String]]] {
+            weeklyDays.map { [Reminder.getWeekDayStr(for: $0.key).full: $0.value.map({ $0.getTimeAndDate().time })] }
+        }
 
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController

@@ -92,7 +92,28 @@ struct EditReminderView: View {
 
                 case .weekly:
                     // page to edit weekly reminders
-                    Text("Weekly")
+                    VStack(alignment: .leading, spacing: 20) {
+                        List {
+                            ForEach(viewModel.mappedWeekDays, id: \.self) { values in
+                                ForEach(Array(values), id: \.key) { day, times in
+                                    NavigationLink {
+                                        EmptyView()
+                                    } label: {
+                                        Text(day)
+                                            .font(.headline)
+                                    }
+                                    
+                                    ScrollView(.horizontal) {
+                                        HStack {
+                                            ForEach(times, id: \.self) { time in
+                                                SmallCardView(string: time)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 case .monthly:
                     Text("monthly")
 
@@ -106,7 +127,7 @@ struct EditReminderView: View {
         }
         .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
         .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
-        .onDisappear(perform: viewModel.save)
+        .onDisappear(perform: viewModel.save) // TODO: - change or find solution to be able to have navigation without performing the save function
     }
 
     private func delete(at offsets: IndexSet) {
