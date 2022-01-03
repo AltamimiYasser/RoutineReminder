@@ -92,12 +92,12 @@ struct EditReminderView: View {
 
                 case .weekly:
                     List {
-                        ForEach(viewModel.mappedWeekDays, id: \.dayOfTheWeek) { day in
-                            NavigationLink {
-                                Text(day.dayOfTheWeek) //TODO:
+                        ForEach($viewModel.weeklyDays, id: \.dayOfTheWeekStr) { $day in
+                            NavigationLink(isActive: $day.isActive) {
+                                Text(day.dayOfTheWeekStr) // TODO: -
                             } label: {
                                 VStack(alignment: .leading) {
-                                    Text(day.dayOfTheWeek)
+                                    Text(day.dayOfTheWeekStr)
                                     ScrollView(.horizontal) {
                                         HStack {
                                             ForEach(day.times.indices, id: \.self) { index in
@@ -106,6 +106,10 @@ struct EditReminderView: View {
                                         }
                                     }
                                 }
+                            }
+                            // for testing
+                            Button("Change day") {
+                                day.dayOfTheWeekInt = 4
                             }
                         }
                     }
