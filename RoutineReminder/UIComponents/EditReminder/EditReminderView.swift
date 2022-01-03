@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditReminderView: View {
     @StateObject private var viewModel: ViewModel
-    @State private var isEditing = false
 
     init(dataController: DataController, reminder: Reminder?) {
         let viewModel = ViewModel(dataController: dataController, reminder: reminder)
@@ -22,14 +21,14 @@ struct EditReminderView: View {
                 TextField("Title", text: $viewModel.title)
             }
 
-                Section("Reminder Type") {
-                    Picker("Reminder Type", selection: $viewModel.reminderType) {
-                        ForEach(Reminder.TypeOfReminder.allCases, id: \.self) { type in
-                                Text(type.rawValue)
-                        }
+            Section("Reminder Type") {
+                Picker("Reminder Type", selection: $viewModel.reminderType) {
+                    ForEach(Reminder.TypeOfReminder.allCases, id: \.self) { type in
+                        Text(type.rawValue)
                     }
-                    .pickerStyle(.menu)
                 }
+                .pickerStyle(.menu)
+            }
 
             Section("Time(s)") {
                 switch viewModel.reminderType {
@@ -85,10 +84,8 @@ struct EditReminderView: View {
                             .background(Color.secondary.opacity(0.1))
                             .cornerRadius(8)
                             .onTapGesture {
-                                if !isEditing {
-                                    withAnimation {
-                                        viewModel.dailyTimes.append(Date())
-                                    }
+                                withAnimation {
+                                    viewModel.dailyTimes.append(Date())
                                 }
                             }
                     }
@@ -107,7 +104,6 @@ struct EditReminderView: View {
                 EditButton()
             }
         }
-//        .onChange(of: viewModel.repeated, perform: viewModel.repeatedChanged)
         .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
         .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
         .onDisappear(perform: viewModel.save)
@@ -115,7 +111,7 @@ struct EditReminderView: View {
 
     private func delete(at offsets: IndexSet) {
         withAnimation {
-           viewModel.dailyTimes.remove(atOffsets: offsets)
+            viewModel.dailyTimes.remove(atOffsets: offsets)
         }
     }
 }
