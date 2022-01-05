@@ -10,11 +10,14 @@ import SwiftUI
 struct WeeklySingleDayEditView: View {
     @Binding var weekday: EditReminderView.WeeklyReminder
 
+    let save: () -> Void
+
     var body: some View {
-        Form {
+        Self._printChanges()
+        return Form {
             Section("Weekday") {
                 Picker("Weekday", selection: $weekday.dayOfTheWeekInt) {
-                    ForEach(1..<8) { weekDayInt in
+                    ForEach(1...7, id: \.self) { weekDayInt in
                         Text(Reminder.getWeekDayStr(for: weekDayInt).full).tag(weekDayInt)
                     }
 
@@ -24,28 +27,31 @@ struct WeeklySingleDayEditView: View {
 
             Section("Time(s)") {
 
-                ForEach(weekday.dates.indices, id: \.self) { index in
-                    DatePicker(
-                        "\(index + 1)",
-                        selection: $weekday.dates[index],
-                        displayedComponents: .hourAndMinute
-                    )
-                        .labelsHidden()
-                }
-                .onDelete(perform: delete)
-
-                Label("Add", systemImage: "plus.circle")
-                    .frame(minWidth: 100, minHeight: 35)
-                    .background(Color.secondary.opacity(0.1))
-                    .cornerRadius(8)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 4)) {
-                            weekday.dates.append(Date())
-                        }
+                List {
+                    ForEach(weekday.dates.indices, id: \.self) { index in
+                        DatePicker(
+                            "\(index + 1)",
+                            selection: $weekday.dates[index],
+                            displayedComponents: .hourAndMinute
+                        )
+                            .labelsHidden()
                     }
+                    .onDelete(perform: delete)
+                }
+                Button("Add") {
+                    withAnimation {
+                        weekday.dates.append(Date())
+                    }
+                }
             }
         }
         .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
+        .onDisappear(perform: saveAndInactivate)
+    }
+
+    private func saveAndInactivate() {
+        save()
+        weekday.isActive = false
     }
 
     private func delete(_ offsets: IndexSet) {

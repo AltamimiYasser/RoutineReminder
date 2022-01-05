@@ -117,8 +117,7 @@ extension EditReminderView {
         }
     }
 
-    struct WeeklyReminder: Identifiable, Equatable {
-        var id = UUID()
+    struct WeeklyReminder: Equatable {
         var dayOfTheWeekStr: String { Reminder.getWeekDayStr(for: dayOfTheWeekInt).full }
         var dayOfTheWeekInt: Int
         var isActive = false

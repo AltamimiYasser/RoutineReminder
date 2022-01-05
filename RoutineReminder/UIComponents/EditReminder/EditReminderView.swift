@@ -48,7 +48,11 @@ struct EditReminderView: View {
                     )
 
                 case .weekly:
-                    WeeklyReminderEditView(weekDays: $viewModel.weekDays, createWeekDay: viewModel.createWeekDay)
+                    WeeklyReminderEditView(
+                        viewModel: viewModel,
+                        createWeekDay: viewModel.createWeekDay,
+                        save: viewModel.save
+                    )
                 }
             }
         }

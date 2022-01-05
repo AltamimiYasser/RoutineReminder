@@ -38,6 +38,9 @@ struct RemindersListView: View {
                 Button("Delete All", action: viewModel.deleteAll)
             }
         }
+        .toolbar {
+            EditButton()
+        }
         .overlay(overLay)
         .navigationTitle("Reminders")
     }

@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct WeeklyReminderEditView: View {
-    @Binding var weekDays: [EditReminderView.WeeklyReminder]
-    var createWeekDay: () -> Void
+    @ObservedObject var viewModel: EditReminderView.ViewModel
+    let createWeekDay: () -> Void
+    let save: () -> Void
 
     var body: some View {
         List {
-            ForEach($weekDays, id: \.dayOfTheWeekStr) { $day in
-                NavigationLink(isActive: $day.isActive) {
-                    WeeklySingleDayEditView(weekday: $day)
+            ForEach(viewModel.weekDays.indices, id: \.self) { index in
+                NavigationLink(isActive: $viewModel.weekDays[index].isActive) {
+                    WeeklySingleDayEditView(weekday: $viewModel.weekDays[index], save: save)
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(day.dayOfTheWeekStr)
+                        Text(viewModel.weekDays[index].dayOfTheWeekStr)
                         ScrollView(.horizontal) {
                             HStack {
-                                ForEach(day.times.indices, id: \.self) { index in
-                                    SmallCardView(string: day.times[index])
+                                ForEach(viewModel.weekDays[index].times.indices, id: \.self) { index2 in
+                                    SmallCardView(string: viewModel.weekDays[index].times[index2])
                                 }
                             }
                         }
@@ -43,6 +44,6 @@ struct WeeklyReminderEditView: View {
     }
 
     private func delete(_ offsets: IndexSet) {
-        weekDays.remove(atOffsets: offsets)
+        viewModel.weekDays.remove(atOffsets: offsets)
     }
 }
