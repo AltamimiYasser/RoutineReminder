@@ -39,12 +39,13 @@ struct WeeklySingleDayEditView: View {
                     .background(Color.secondary.opacity(0.1))
                     .cornerRadius(8)
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation(.easeInOut(duration: 4)) {
                             weekday.dates.append(Date())
                         }
                     }
             }
         }
+        .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
     }
 
     private func delete(_ offsets: IndexSet) {

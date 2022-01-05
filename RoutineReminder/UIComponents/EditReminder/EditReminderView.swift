@@ -59,9 +59,8 @@ struct EditReminderView: View {
         }
         .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
         .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
-//        .onChange(of: viewModel.reminderType, perform: viewModel.typeChanged)
-//        .onChange(of: viewModel.weekDays, perform: {_ in viewModel.createWeekDay()})
         .onDisappear(perform: viewModel.save)
+        .navigationTitle("Edit Reminder")
     }
 
 }
