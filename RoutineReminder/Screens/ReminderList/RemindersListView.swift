@@ -25,7 +25,7 @@ struct RemindersListView: View {
                     NavigationLink {
                         EditReminderView(dataController: dataController, reminder: reminder)
                     } label: {
-                        ReminderRowView(reminder: reminder, dataController: dataController)
+                        ReminderRowView(dataController: dataController, reminder: reminder)
                     }
 
                 }

@@ -3,7 +3,6 @@
     <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dayOfTheWeek" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="monthly" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReminderTypeMonthly" inverseName="days" inverseEntity="ReminderTypeMonthly"/>
         <relationship name="times" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Time" inverseName="day" inverseEntity="Time"/>
         <relationship name="weekly" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReminderTypeWeekly" inverseName="days" inverseEntity="ReminderTypeWeekly"/>
     </entity>
@@ -20,7 +19,6 @@
     <entity name="ReminderType" representedClassName="ReminderType" syncable="YES" codeGenerationType="class">
         <relationship name="daily" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderTimeDaily" inverseName="reminderType" inverseEntity="ReminderTimeDaily"/>
         <relationship name="hourly" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderTypeHourly" inverseName="reminderType" inverseEntity="ReminderTypeHourly"/>
-        <relationship name="monthly" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderTypeMonthly" inverseName="reminderType" inverseEntity="ReminderTypeMonthly"/>
         <relationship name="oneTime" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderTypeOneTime" inverseName="reminderType" inverseEntity="ReminderTypeOneTime"/>
         <relationship name="reminder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reminder" inverseName="reminderType" inverseEntity="Reminder"/>
         <relationship name="weekly" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ReminderTypeWeekly" inverseName="reminderType" inverseEntity="ReminderTypeWeekly"/>
@@ -28,10 +26,6 @@
     <entity name="ReminderTypeHourly" representedClassName="ReminderTypeHourly" syncable="YES" codeGenerationType="class">
         <attribute name="interval" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReminderType" inverseName="hourly" inverseEntity="ReminderType"/>
-    </entity>
-    <entity name="ReminderTypeMonthly" representedClassName="ReminderTypeMonthly" syncable="YES" codeGenerationType="class">
-        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" inverseName="monthly" inverseEntity="Day"/>
-        <relationship name="reminderType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReminderType" inverseName="monthly" inverseEntity="ReminderType"/>
     </entity>
     <entity name="ReminderTypeOneTime" representedClassName="ReminderTypeOneTime" syncable="YES" codeGenerationType="class">
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -47,12 +41,11 @@
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="times" inverseEntity="Day"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-432.80078125" positionY="103.85546875" width="128" height="104"/>
+        <element name="Day" positionX="-432.80078125" positionY="103.85546875" width="128" height="89"/>
         <element name="Reminder" positionX="-569.81640625" positionY="-105.2578125" width="128" height="89"/>
         <element name="ReminderTimeDaily" positionX="-131.72265625" positionY="-54.421875" width="128" height="73"/>
-        <element name="ReminderType" positionX="-372.921875" positionY="-58.8359375" width="128" height="133"/>
+        <element name="ReminderType" positionX="-372.921875" positionY="-58.8359375" width="128" height="104"/>
         <element name="ReminderTypeHourly" positionX="-197.48046875" positionY="-203.59375" width="128" height="59"/>
-        <element name="ReminderTypeMonthly" positionX="-315" positionY="90" width="128" height="59"/>
         <element name="ReminderTypeOneTime" positionX="-81.73046875" positionY="74.4921875" width="128" height="73"/>
         <element name="ReminderTypeWeekly" positionX="-324" positionY="81" width="128" height="59"/>
         <element name="Time" positionX="-420.76953125" positionY="229.59765625" width="128" height="74"/>

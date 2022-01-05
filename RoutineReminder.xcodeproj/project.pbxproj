@@ -17,6 +17,10 @@
 		3B0DD75027815EEC00A1591C /* EditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74F27815EEC00A1591C /* EditReminderView.swift */; };
 		3B0DD75327815F0900A1591C /* EditReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */; };
 		3B288854278336FC00760EE2 /* SmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B288853278336FC00760EE2 /* SmallCardView.swift */; };
+		3B2888562784FEC100760EE2 /* HourlyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888552784FEC100760EE2 /* HourlyReminderEditView.swift */; };
+		3B2888582785014400760EE2 /* DailyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888572785014400760EE2 /* DailyReminderEditView.swift */; };
+		3B28885A2785062400760EE2 /* WeeklyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */; };
+		3B28885D27850CF100760EE2 /* WeeklySingleDayEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28885C27850CF100760EE2 /* WeeklySingleDayEditView.swift */; };
 		3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */; };
 		3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */; };
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
@@ -41,6 +45,10 @@
 		3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderViewModel.swift; sourceTree = "<group>"; };
 		3B0DD7542782D11500A1591C /* RoutineReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RoutineReminder.entitlements; sourceTree = "<group>"; };
 		3B288853278336FC00760EE2 /* SmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCardView.swift; sourceTree = "<group>"; };
+		3B2888552784FEC100760EE2 /* HourlyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyReminderEditView.swift; sourceTree = "<group>"; };
+		3B2888572785014400760EE2 /* DailyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderEditView.swift; sourceTree = "<group>"; };
+		3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReminderEditView.swift; sourceTree = "<group>"; };
+		3B28885C27850CF100760EE2 /* WeeklySingleDayEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySingleDayEditView.swift; sourceTree = "<group>"; };
 		3BF7C1FD277E6BA0003CA5F9 /* RoutineReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutineReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineReminderApp.swift; sourceTree = "<group>"; };
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
@@ -89,10 +97,22 @@
 		3B0DD75127815EF400A1591C /* EditReminder */ = {
 			isa = PBXGroup;
 			children = (
+				3B28885B27850C6C00760EE2 /* WeeklyReminderEdit */,
 				3B0DD74F27815EEC00A1591C /* EditReminderView.swift */,
 				3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */,
+				3B2888552784FEC100760EE2 /* HourlyReminderEditView.swift */,
+				3B2888572785014400760EE2 /* DailyReminderEditView.swift */,
 			);
 			path = EditReminder;
+			sourceTree = "<group>";
+		};
+		3B28885B27850C6C00760EE2 /* WeeklyReminderEdit */ = {
+			isa = PBXGroup;
+			children = (
+				3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */,
+				3B28885C27850CF100760EE2 /* WeeklySingleDayEditView.swift */,
+			);
+			path = WeeklyReminderEdit;
 			sourceTree = "<group>";
 		};
 		3BF7C1F4277E6BA0003CA5F9 = {
@@ -270,13 +290,16 @@
 				3B0DD74C2781245500A1591C /* ReminderRowViewModel.swift in Sources */,
 				3BF7C210277E71FF003CA5F9 /* DataController.swift in Sources */,
 				3B0DD74A2781200100A1591C /* ReminderRowView.swift in Sources */,
+				3B2888562784FEC100760EE2 /* HourlyReminderEditView.swift in Sources */,
 				3B0DD74627810ECE00A1591C /* InfoOverlayView.swift in Sources */,
 				3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */,
 				3B0DD74E2781381F00A1591C /* Date+Ext.swift in Sources */,
 				3B0DD75027815EEC00A1591C /* EditReminderView.swift in Sources */,
 				3BF7C21B277E86D2003CA5F9 /* Reminder+Ext.swift in Sources */,
 				3BF7C219277E7C3F003CA5F9 /* Main.xcdatamodeld in Sources */,
+				3B28885D27850CF100760EE2 /* WeeklySingleDayEditView.swift in Sources */,
 				3B0DD74827810FAF00A1591C /* HomeView.swift in Sources */,
+				3B2888582785014400760EE2 /* DailyReminderEditView.swift in Sources */,
 				3BF7C21E277E9384003CA5F9 /* DataController+Ext.swift in Sources */,
 				3B288854278336FC00760EE2 /* SmallCardView.swift in Sources */,
 				3B0DD74327810C1900A1591C /* NotificationsManager.swift in Sources */,
@@ -284,6 +307,7 @@
 				3BF7C221277E9E02003CA5F9 /* ReminderListViewModel.swift in Sources */,
 				3B0DD75327815F0900A1591C /* EditReminderViewModel.swift in Sources */,
 				3B0DD7402780E31700A1591C /* Int+Ext.swift in Sources */,
+				3B28885A2785062400760EE2 /* WeeklyReminderEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

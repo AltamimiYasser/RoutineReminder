@@ -36,101 +36,32 @@ struct EditReminderView: View {
                     DatePicker("Time", selection: $viewModel.oneTimeTime)
 
                 case .hourly:
-                    VStack(alignment: .leading) {
-                        Text("How often do you want to be reminded?")
-                            .font(.callout)
-                            .foregroundColor(.secondary)
-                        HStack {
-                            Text("Hours")
-                            Spacer()
-                            Picker("Hours:", selection: $viewModel.timeIntervalHoursPicker) {
-                                ForEach((0...23).reversed(), id: \.self) { num in
-                                    Text("\(num)").tag(num)
-                                        .font(.headline)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }
-                        .padding(.trailing)
-
-                        HStack {
-                            Text("Minutes")
-                            Spacer()
-                            Picker("Minutes:", selection: $viewModel.timeIntervalMinutesPicker) {
-                                ForEach((viewModel.minutesPickersRangeMin...59).reversed(), id: \.self) { num in
-                                    Text("\(num)").tag(num)
-                                        .font(.headline)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                        }
-                        .padding(.trailing)
-                    }
+                    HourlyReminderEditView(
+                        timeIntervalHoursPicker: $viewModel.timeIntervalHoursPicker,
+                        timeIntervalMinutesPicker: $viewModel.timeIntervalMinutesPicker
+                    )
 
                 case .daily:
-                    List {
-                        ForEach(viewModel.dailyTimes.indices, id: \.self) { index in
-                            DatePicker(
-                                "\(index + 1)",
-                                selection: $viewModel.dailyTimes[index],
-                                displayedComponents: .hourAndMinute
-                            )
-                                .labelsHidden()
-                        }
-                        .onDelete(perform: delete)
-
-                        Label("Add", systemImage: "plus.circle")
-                            .frame(minWidth: 100, minHeight: 35)
-                            .background(Color.secondary.opacity(0.1))
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                withAnimation {
-                                    viewModel.dailyTimes.append(Date())
-                                }
-                            }
-                    }
+                    DailyReminderEditView(
+                        dailyTimes: $viewModel.dailyTimes,
+                        onDelete: viewModel.deleteTimeFromDailyTimes
+                    )
 
                 case .weekly:
-                    List {
-                        ForEach($viewModel.weeklyDays, id: \.dayOfTheWeekStr) { $day in
-                            NavigationLink(isActive: $day.isActive) {
-                                Text(day.dayOfTheWeekStr) // TODO: -
-                            } label: {
-                                VStack(alignment: .leading) {
-                                    Text(day.dayOfTheWeekStr)
-                                    ScrollView(.horizontal) {
-                                        HStack {
-                                            ForEach(day.times.indices, id: \.self) { index in
-                                                SmallCardView(string: day.times[index])
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            // for testing
-                            Button("Change day") {
-                                day.dayOfTheWeekInt = 4
-                            }
-                        }
-                    }
-                case .monthly:
-                    Text("monthly")
+                    WeeklyReminderEditView(weekDays: $viewModel.weekDays, createWeekDay: viewModel.createWeekDay)
                 }
             }
         }
         .toolbar {
-            if case Reminder.TypeOfReminder.daily = viewModel.reminderType {
+            if viewModel.reminderType == .daily || viewModel.reminderType == .weekly {
                 EditButton()
             }
         }
         .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
         .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
-        .onDisappear(perform: viewModel.save) // TODO: Any navigation link will pop back
+//        .onChange(of: viewModel.reminderType, perform: viewModel.typeChanged)
+//        .onChange(of: viewModel.weekDays, perform: {_ in viewModel.createWeekDay()})
+        .onDisappear(perform: viewModel.save)
     }
 
-    private func delete(at offsets: IndexSet) {
-        withAnimation {
-            viewModel.dailyTimes.remove(atOffsets: offsets)
-        }
-    }
 }

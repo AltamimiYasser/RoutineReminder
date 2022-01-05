@@ -11,7 +11,7 @@ struct ReminderRowView: View {
     @StateObject private var viewModel: ViewModel
     private var reminder: Reminder { viewModel.reminder }
 
-    init(reminder: Reminder, dataController: DataController) {
+    init(dataController: DataController, reminder: Reminder) {
         let viewModel = ViewModel(dataController: dataController, reminder: reminder)
         _viewModel = .init(wrappedValue: viewModel)
     }
@@ -81,17 +81,6 @@ extension ReminderRowView {
                     }
 
                 }
-
-            case .monthly(days: let days):
-                getLeftSideView(subTitle: "Repeats monthly every") {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(days.sorted(by: {$0.key > $1.key}), id: \.key) { day, _ in
-                                SmallCardView(string: day.getTimeAndDate().date)
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -106,11 +95,5 @@ extension ReminderRowView {
             }
             .padding(.horizontal)
         }
-    }
-}
-
-struct ReminderRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReminderRowView(reminder: Reminder.example, dataController: DataController.preview)
     }
 }

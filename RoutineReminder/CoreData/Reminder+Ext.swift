@@ -14,7 +14,6 @@ extension Reminder {
         if reminderType?.hourly != nil { return .hourly}
         if reminderType?.daily != nil { return .daily}
         if reminderType?.weekly != nil { return .weekly}
-        if reminderType?.monthly != nil { return .monthly}
         return .oneTime
     }
 
@@ -54,28 +53,6 @@ extension Reminder {
             return .weekly(days: dictDays)
         }
 
-        if reminderType?.monthly != nil {
-            let days = reminderType?.monthly?.days
-
-            var arrTimes = [Date: [Date]]()
-
-            for day in days ?? [] {
-                let day = day as? Day
-                let date = day?.date ?? Date()
-                let times = day?.times
-
-                for time in times ?? [] {
-                    let newTime = time as? Time
-                    let exactTime = newTime?.date ?? Date()
-                    arrTimes[date] = []
-                    arrTimes[date]?.append(exactTime)
-                }
-
-            }
-
-            return .monthly(days: arrTimes)
-        }
-
         let time = reminderType?.oneTime?.time
             return .oneTime(time: time ?? Date())
     }
@@ -85,26 +62,15 @@ extension Reminder {
         case hourly = "Hourly"
         case daily = "Daily"
         case weekly = "Weekly"
-        case monthly = "Montyly"
     }
 
-    enum TypeOfReminderData: CaseIterable, Equatable, Identifiable, Hashable {
+    enum TypeOfReminderData: Equatable, Identifiable, Hashable {
         var id: TypeOfReminderData { self }
-        static var allCases: [Reminder.TypeOfReminderData] {
-            return [
-                .oneTime(time: Date()),
-                .hourly(interval: 0),
-                daily(times: []),
-                weekly(days: [:]),
-                .monthly(days: [:])
-            ]
-        }
 
         case oneTime(time: Date)
         case hourly(interval: Int)
         case daily(times: [Date])
         case weekly(days: [Int: [Date]])
-        case monthly(days: [Date: [Date]])
 
         var description: String {
             switch self {
@@ -116,8 +82,6 @@ extension Reminder {
                 return "Daily"
             case .weekly:
                 return "Weekly"
-            case .monthly:
-                return "Monthly"
             }
         }
 

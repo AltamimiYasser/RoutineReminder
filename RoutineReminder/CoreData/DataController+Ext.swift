@@ -40,7 +40,6 @@ extension DataController {
         delete(reminderType.hourly)
         delete(reminderType.daily)
         delete(reminderType.weekly)
-        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -58,7 +57,6 @@ extension DataController {
         delete(reminderType.oneTime)
         delete(reminderType.daily)
         delete(reminderType.weekly)
-        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -81,7 +79,6 @@ extension DataController {
         delete(reminderType.oneTime)
         delete(reminderType.hourly)
         delete(reminderType.weekly)
-        delete(reminderType.monthly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -113,42 +110,6 @@ extension DataController {
         delete(reminderType.oneTime)
         delete(reminderType.hourly)
         delete(reminderType.daily)
-        delete(reminderType.monthly)
-
-        // reminder
-        createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
-    }
-
-    // In Monthly Reminder we link the date field to the times
-    func createOrUpdateMonthlyReminder(
-        title: String,
-        times: [Date: [Date]], // [date:[times]]
-        reminder: Reminder? = nil
-    ) {
-        let monthly = ReminderTypeMonthly(context: context)
-
-        // we don't need day of the week so we keep it at nil
-        for (day, times) in times {
-            // for everyday create a day object
-            let newDay = Day(context: context)
-            newDay.date = day
-            for time in times {
-            // for every time create a time
-                let newTime = Time(context: context)
-                newTime.date = time
-                newDay.addToTimes(newTime)
-            }
-            monthly.addToDays(newDay)
-        }
-
-        let reminderType = ReminderType(context: context)
-        reminderType.monthly = monthly
-
-        // delete everything else
-        delete(reminderType.oneTime)
-        delete(reminderType.hourly)
-        delete(reminderType.daily)
-        delete(reminderType.weekly)
 
         // reminder
         createOrUpdateReminder(withTitle: title, type: reminderType, reminder: reminder)
@@ -168,11 +129,5 @@ extension DataController {
         let times1 = [Date(), Date().addingTimeInterval(TimeInterval(6.hoursToSeconds()))]
         let times2 = [Date(), Date().addingTimeInterval(TimeInterval(12.hoursToSeconds()))]
         createOrUpdateWeeklyReminder(title: "Fourth Reminder", daysAndTimes: [1: times1, 5: times2])
-
-        // MONTHLY
-        // day with time
-        let day1 = Date().addingTimeInterval(TimeInterval(9.daysToSeconds()))
-        let day2 = Date().addingTimeInterval(TimeInterval(22.daysToSeconds()))
-        createOrUpdateMonthlyReminder(title: "Fifth Reminder", times: [day1: times1, day2: times2])
     }
 }
