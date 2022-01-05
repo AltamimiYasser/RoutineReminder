@@ -37,14 +37,15 @@ struct WeeklySingleDayEditView: View {
                             .labelsHidden()
                     }
                     .onDelete(perform: delete)
-                }
-                Button("Add") {
-                    withAnimation {
-                        weekday.dates.append(Date())
+                    Button("Add") {
+                        withAnimation {
+                            weekday.dates.append(Date())
+                        }
                     }
                 }
             }
         }
+        .animation(.default, value: weekday.dates)
         .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
         .onDisappear(perform: saveAndInactivate)
     }
