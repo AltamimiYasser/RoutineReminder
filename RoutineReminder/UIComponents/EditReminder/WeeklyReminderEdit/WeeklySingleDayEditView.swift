@@ -10,7 +10,7 @@ import SwiftUI
 struct WeeklySingleDayEditView: View {
     @Binding var weekday: EditReminderView.WeeklyReminder
 
-    let save: () -> Void
+//    let save: () -> Void
 
     var body: some View {
         Self._printChanges()
@@ -47,12 +47,7 @@ struct WeeklySingleDayEditView: View {
         }
         .animation(.default, value: weekday.dates)
         .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
-        .onDisappear(perform: saveAndInactivate)
-    }
-
-    private func saveAndInactivate() {
-        save()
-        weekday.isActive = false
+//        .onDisappear(perform: save)
     }
 
     private func delete(_ offsets: IndexSet) {

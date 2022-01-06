@@ -18,16 +18,15 @@ extension EditReminderView {
 
         @Published var oneTimeTime = Date()
 
-        // to auto update when we update the ints of hours and minutes
-        @Published private var hourlyTimeInterval = 30.minutesToSeconds()
-        @Published var timeIntervalHoursPicker = 0
-        @Published var timeIntervalMinutesPicker = 30
+//        @Published var hourlyIntervalTime: DurationPickerView.Time = .init(hour: 0, minute: 30)
+        @Published var hourlyDuration = TimeInterval(30.minutesToSeconds())
+//        @Published var timeIntervalHoursPicker = 0
+//        @Published var timeIntervalMinutesPicker = 30
 
         @Published var dailyTimes: [Date] = []
         @Published var weekDays: [WeeklyReminder] = []
 
-        private var isEditing = false
-        private var isDetailViewIsActive: Bool { weekDays.map { $0.isActive}.contains(true) }
+        var isEditing = false
 
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController
@@ -49,10 +48,11 @@ extension EditReminderView {
                 self.oneTimeTime = time
 
             case .hourly(interval: let interval):
-                self.hourlyTimeInterval = interval
-                let (hours, minutes) = interval.secondsToHoursAndMinutes()
-                self.timeIntervalHoursPicker = hours
-                self.timeIntervalMinutesPicker = minutes
+//                self.hourlyIntervalTime = .init(
+//                    hour: interval.secondsToHoursAndMinutes().hours,
+//                    minute: interval.secondsToHoursAndMinutes().minutes
+//                )
+                self.hourlyDuration = TimeInterval(interval)
 
             case .daily(times: let times):
                 self.dailyTimes = times
@@ -68,15 +68,15 @@ extension EditReminderView {
         }
 
         // MARK: - Reacting
-        func hoursIntervalChanged(_ newValue: Int) {
-            if timeIntervalMinutesPicker == 0 && newValue == 0 { timeIntervalMinutesPicker = 1 }
-            self.hourlyTimeInterval += newValue.hoursToSeconds()
-        }
-
-        func minutesIntervalChanged(_ newValue: Int) {
-            if timeIntervalHoursPicker == 0 { timeIntervalMinutesPicker = 1}
-            self.hourlyTimeInterval += newValue.minutesToSeconds()
-        }
+//        func hoursIntervalChanged(_ newValue: Int) {
+//            if timeIntervalMinutesPicker == 0 && newValue == 0 { timeIntervalMinutesPicker = 1 }
+//            self.hourlyTimeInterval += newValue.hoursToSeconds()
+//        }
+//
+//        func minutesIntervalChanged(_ newValue: Int) {
+//            if timeIntervalHoursPicker == 0 { timeIntervalMinutesPicker = 1}
+//            self.hourlyTimeInterval += newValue.minutesToSeconds()
+//        }
 
         func createWeekDay() {
             weekDays.append(WeeklyReminder(dayOfTheWeekInt: 1, dates: []))
@@ -84,31 +84,30 @@ extension EditReminderView {
 
         // MARK: User Intent(s)
         func save() {
-            if !isDetailViewIsActive {
-                switch reminderType {
-                case .oneTime:
-                    dataController.createOrUpdateOneTimeReminder(
-                        title: title, time: oneTimeTime, reminder: isEditing ? reminder : nil
-                    )
-                case .hourly:
-                    dataController.createOrUpdateHourlyReminder(
-                        title: title, interval: hourlyTimeInterval, reminder: isEditing ? reminder : nil
-                    )
-                case .daily:
-                    dataController.createOrUpdateDailyReminder(
-                        title: title, times: dailyTimes, reminder: isEditing ? reminder : nil)
+            switch reminderType {
+            case .oneTime:
+                dataController.createOrUpdateOneTimeReminder(
+                    title: title, time: oneTimeTime, reminder: isEditing ? reminder : nil
+                )
+            case .hourly:
+                print("🔥 interval is \(hourlyDuration)")
+                dataController.createOrUpdateHourlyReminder(
+                    title: title, interval: Int(hourlyDuration), reminder: isEditing ? reminder : nil
+                )
+            case .daily:
+                dataController.createOrUpdateDailyReminder(
+                    title: title, times: dailyTimes, reminder: isEditing ? reminder : nil)
 
-                case .weekly:
-                    dataController.createOrUpdateWeeklyReminder(
-                        title: title,
-                        daysAndTimes: weekDays.reduce([Int: [Date]]()) { (dict, weekday) -> [Int: [Date]] in
-                            var dict = dict
-                            dict[weekday.dayOfTheWeekInt] = weekday.dates
-                            return dict
-                        },
-                        reminder: isEditing ? reminder : nil
-                    )
-                }
+            case .weekly:
+                dataController.createOrUpdateWeeklyReminder(
+                    title: title,
+                    daysAndTimes: weekDays.reduce([Int: [Date]]()) { (dict, weekday) -> [Int: [Date]] in
+                        var dict = dict
+                        dict[weekday.dayOfTheWeekInt] = weekday.dates
+                        return dict
+                    },
+                    reminder: isEditing ? reminder : nil
+                )
             }
         }
 
@@ -120,7 +119,6 @@ extension EditReminderView {
     struct WeeklyReminder: Equatable {
         var dayOfTheWeekStr: String { Reminder.getWeekDayStr(for: dayOfTheWeekInt).full }
         var dayOfTheWeekInt: Int
-        var isActive = false
         var dates: [Date]
         var times: [String] { dates.map({ $0.getTimeAndDate().time }) }
     }

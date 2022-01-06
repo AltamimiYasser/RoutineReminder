@@ -15,8 +15,8 @@ struct WeeklyReminderEditView: View {
     var body: some View {
         List {
             ForEach(viewModel.weekDays.indices, id: \.self) { index in
-                NavigationLink(isActive: $viewModel.weekDays[index].isActive) {
-                    WeeklySingleDayEditView(weekday: $viewModel.weekDays[index], save: save)
+                NavigationLink {
+                    WeeklySingleDayEditView(weekday: $viewModel.weekDays[index])
                 } label: {
                     VStack(alignment: .leading) {
                         Text(viewModel.weekDays[index].dayOfTheWeekStr)

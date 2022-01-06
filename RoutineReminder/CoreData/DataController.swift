@@ -42,14 +42,13 @@ class DataController {
             do {
                 try context.save()
             } catch {
-                print("🔥 Error: \(String(error.localizedDescription))")
+                print("🔥 Error saving: \(error)")
             }
         }
     }
 
     func delete(_ object: NSManagedObject?) {
         if let object = object {
-            print("🔥 object \(object.description) exists")
             context.delete(object)
         }
     }

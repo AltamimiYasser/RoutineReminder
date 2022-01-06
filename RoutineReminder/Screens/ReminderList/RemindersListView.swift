@@ -31,18 +31,31 @@ struct RemindersListView: View {
                 }
                 .onDelete(perform: viewModel.delete)
                 .padding(.vertical)
+                if !viewModel.reminders.isEmpty {
+                    NavigationLink {
+                        EditReminderView(dataController: dataController)
+                    } label: {
+                        Text("Add New Reminder")
+                            .frame(minHeight: 100)
+                            .font(.headline)
+                            .padding(.horizontal)
+                            .foregroundColor(.blue)
+                    }
+                }
+
             }
             .listStyle(.plain)
-            HStack {
-                Button("Generate Sample Data", action: viewModel.generateSampleData)
-                Button("Delete All", action: viewModel.deleteAll)
-            }
         }
         .toolbar {
-            EditButton()
+            if !viewModel.reminders.isEmpty {
+                EditButton()
+            }
         }
         .overlay(overLay)
         .navigationTitle("Reminders")
+        .sheet(isPresented: $showNewReminderSheet, onDismiss: nil) {
+            EditReminderView(dataController: dataController)
+        }
     }
 
     private var overLay: some View {
@@ -56,6 +69,7 @@ struct RemindersListView: View {
                 )
             }
         }
+        .transition(.slide)
     }
 }
 
