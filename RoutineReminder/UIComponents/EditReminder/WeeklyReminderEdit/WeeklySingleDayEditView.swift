@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct WeeklySingleDayEditView: View {
+    @Environment(\.dismiss) var dismiss
     @Binding var weekday: EditReminderView.WeeklyReminder
 
-//    let save: () -> Void
+    let save: () -> Void
 
     var body: some View {
         Self._printChanges()
@@ -47,7 +48,13 @@ struct WeeklySingleDayEditView: View {
         }
         .animation(.default, value: weekday.dates)
         .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
-//        .onDisappear(perform: save)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem {
+                EditButton()
+            }
+            CustomBackButtonView(dismiss: dismiss, action: save)
+        }
     }
 
     private func delete(_ offsets: IndexSet) {

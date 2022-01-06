@@ -54,7 +54,9 @@ struct RemindersListView: View {
         .overlay(overLay)
         .navigationTitle("Reminders")
         .sheet(isPresented: $showNewReminderSheet, onDismiss: nil) {
-            EditReminderView(dataController: dataController)
+            NavigationView {
+                EditReminderView(dataController: dataController)
+            }
         }
     }
 

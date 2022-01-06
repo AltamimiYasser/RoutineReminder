@@ -26,11 +26,10 @@ struct EditReminderView: View {
                 Section("Reminder Type") {
                     Picker("Reminder Type", selection: $viewModel.reminderType) {
                         ForEach(Reminder.TypeOfReminder.allCases, id: \.self) { type in
-                            Text(type.rawValue)
+                            Text(type.rawValue).font(.headline)
                         }
                     }
-//                    .pickerStyle(.menu)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .pickerStyle(.segmented)
                 }
 
                 Section("Time(s)") {
@@ -43,7 +42,6 @@ struct EditReminderView: View {
                             .font(.callout)
                             .foregroundColor(.secondary)
                         DurationPicker(duration: $viewModel.hourlyDuration)
-//                        HourlyReminderEditView(time: $viewModel.hourlyIntervalTime)
 
                     case .daily:
                         DailyReminderEditView(
@@ -59,24 +57,16 @@ struct EditReminderView: View {
                         )
                     }
                 }
-                // if in the new reminder sheet and not editing an existing reminder
-            }
-            Button(viewModel.isEditing ? "Update" : "Save") {
-                viewModel.save()
-                    dismiss()
             }
         }
+        .navigationBarBackButtonHidden(true)
         .padding(.bottom)
         .toolbar {
-            if viewModel.reminderType == .daily || viewModel.reminderType == .weekly {
+            ToolbarItem {
                 EditButton()
             }
+            CustomBackButtonView(dismiss: dismiss, action: viewModel.save)
         }
-//        .onChange(of: viewModel.timeIntervalHoursPicker, perform: viewModel.hoursIntervalChanged)
-//        .onChange(of: viewModel.timeIntervalMinutesPicker, perform: viewModel.minutesIntervalChanged)
-//        .onDisappear(perform: {
-//            if viewModel.isEditing { viewModel.save() }
-//        })
         .navigationTitle("Edit Reminder")
     }
 

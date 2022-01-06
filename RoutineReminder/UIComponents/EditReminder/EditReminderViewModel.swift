@@ -17,12 +17,7 @@ extension EditReminderView {
         @Published var reminderType: Reminder.TypeOfReminder = .oneTime
 
         @Published var oneTimeTime = Date()
-
-//        @Published var hourlyIntervalTime: DurationPickerView.Time = .init(hour: 0, minute: 30)
         @Published var hourlyDuration = TimeInterval(30.minutesToSeconds())
-//        @Published var timeIntervalHoursPicker = 0
-//        @Published var timeIntervalMinutesPicker = 30
-
         @Published var dailyTimes: [Date] = []
         @Published var weekDays: [WeeklyReminder] = []
 
@@ -48,10 +43,6 @@ extension EditReminderView {
                 self.oneTimeTime = time
 
             case .hourly(interval: let interval):
-//                self.hourlyIntervalTime = .init(
-//                    hour: interval.secondsToHoursAndMinutes().hours,
-//                    minute: interval.secondsToHoursAndMinutes().minutes
-//                )
                 self.hourlyDuration = TimeInterval(interval)
 
             case .daily(times: let times):
@@ -68,15 +59,6 @@ extension EditReminderView {
         }
 
         // MARK: - Reacting
-//        func hoursIntervalChanged(_ newValue: Int) {
-//            if timeIntervalMinutesPicker == 0 && newValue == 0 { timeIntervalMinutesPicker = 1 }
-//            self.hourlyTimeInterval += newValue.hoursToSeconds()
-//        }
-//
-//        func minutesIntervalChanged(_ newValue: Int) {
-//            if timeIntervalHoursPicker == 0 { timeIntervalMinutesPicker = 1}
-//            self.hourlyTimeInterval += newValue.minutesToSeconds()
-//        }
 
         func createWeekDay() {
             weekDays.append(WeeklyReminder(dayOfTheWeekInt: 1, dates: []))

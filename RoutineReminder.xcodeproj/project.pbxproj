@@ -20,8 +20,8 @@
 		3B2888582785014400760EE2 /* DailyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888572785014400760EE2 /* DailyReminderEditView.swift */; };
 		3B28885A2785062400760EE2 /* WeeklyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */; };
 		3B28885D27850CF100760EE2 /* WeeklySingleDayEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28885C27850CF100760EE2 /* WeeklySingleDayEditView.swift */; };
-		3B2888792786671E00760EE2 /* DropDownPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888782786671D00760EE2 /* DropDownPicker.swift */; };
 		3B28887B278670C100760EE2 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28887A278670C000760EE2 /* DurationPickerView.swift */; };
+		3B28887D27868ED100760EE2 /* CustomBackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28887C27868ED100760EE2 /* CustomBackButtonView.swift */; };
 		3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */; };
 		3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */; };
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
@@ -49,8 +49,8 @@
 		3B2888572785014400760EE2 /* DailyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderEditView.swift; sourceTree = "<group>"; };
 		3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReminderEditView.swift; sourceTree = "<group>"; };
 		3B28885C27850CF100760EE2 /* WeeklySingleDayEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySingleDayEditView.swift; sourceTree = "<group>"; };
-		3B2888782786671D00760EE2 /* DropDownPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPicker.swift; sourceTree = "<group>"; };
 		3B28887A278670C000760EE2 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
+		3B28887C27868ED100760EE2 /* CustomBackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButtonView.swift; sourceTree = "<group>"; };
 		3BF7C1FD277E6BA0003CA5F9 /* RoutineReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutineReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineReminderApp.swift; sourceTree = "<group>"; };
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 				3B0DD75127815EF400A1591C /* EditReminder */,
 				3B0DD74527810ECE00A1591C /* InfoOverlayView.swift */,
 				3B288853278336FC00760EE2 /* SmallCardView.swift */,
-				3B2888782786671D00760EE2 /* DropDownPicker.swift */,
 				3B28887A278670C000760EE2 /* DurationPickerView.swift */,
+				3B28887C27868ED100760EE2 /* CustomBackButtonView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -295,6 +295,7 @@
 				3B28887B278670C100760EE2 /* DurationPickerView.swift in Sources */,
 				3B0DD74A2781200100A1591C /* ReminderRowView.swift in Sources */,
 				3B0DD74627810ECE00A1591C /* InfoOverlayView.swift in Sources */,
+				3B28887D27868ED100760EE2 /* CustomBackButtonView.swift in Sources */,
 				3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */,
 				3B0DD74E2781381F00A1591C /* Date+Ext.swift in Sources */,
 				3B0DD75027815EEC00A1591C /* EditReminderView.swift in Sources */,
@@ -304,7 +305,6 @@
 				3B0DD74827810FAF00A1591C /* HomeView.swift in Sources */,
 				3B2888582785014400760EE2 /* DailyReminderEditView.swift in Sources */,
 				3BF7C21E277E9384003CA5F9 /* DataController+Ext.swift in Sources */,
-				3B2888792786671E00760EE2 /* DropDownPicker.swift in Sources */,
 				3B288854278336FC00760EE2 /* SmallCardView.swift in Sources */,
 				3B0DD74327810C1900A1591C /* NotificationsManager.swift in Sources */,
 				3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */,
