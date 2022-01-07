@@ -21,6 +21,7 @@ struct EditReminderView: View {
             Form {
                 Section("General") {
                     TextField("Title", text: $viewModel.title)
+                    TextField("Description", text: $viewModel.message)
                 }
 
                 Section("Reminder Type") {
@@ -32,7 +33,7 @@ struct EditReminderView: View {
                     .pickerStyle(.segmented)
                 }
 
-                Section("Time(s)") {
+                Section {
                     switch viewModel.reminderType {
                     case .oneTime:
                         DatePicker("Time", selection: $viewModel.oneTimeTime)
@@ -56,6 +57,10 @@ struct EditReminderView: View {
                             save: viewModel.save
                         )
                     }
+                } header: {
+                    Text("Time(s)")
+                } footer: {
+                    Text(viewModel.footerDescription)
                 }
             }
         }

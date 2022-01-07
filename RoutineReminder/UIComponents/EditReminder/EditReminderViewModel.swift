@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension EditReminderView {
     class ViewModel: ObservableObject {
+
         private let dataController: DataController
         @Published var reminder: Reminder?
         @Published var title = ""
+        @Published var message  = ""
 
         @Published private var reminderTypeData: Reminder.TypeOfReminderData = .oneTime(time: Date())
         @Published var reminderType: Reminder.TypeOfReminder = .oneTime
@@ -22,6 +25,19 @@ extension EditReminderView {
         @Published var weekDays: [WeeklyReminder] = []
 
         var isEditing = false
+
+        var footerDescription: LocalizedStringKey {
+            switch reminderType {
+            case .oneTime:
+                return ""
+            case .hourly:
+               return "You will be reminded based on the specified duration"
+            case .daily:
+                return "You will be reminded daily on the times you add here"
+            case .weekly:
+               return "Add the days of the week here. You can have multiple reminders for a chosen weekday"
+            }
+        }
 
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController
@@ -37,8 +53,9 @@ extension EditReminderView {
 
         private func assignReminderValues() {
             self.title = reminder?.title ?? ""
-            switch reminderTypeData {
+            self.message = reminder?.message ?? ""
 
+            switch reminderTypeData {
             case .oneTime(time: let time):
                 self.oneTimeTime = time
 
@@ -69,20 +86,30 @@ extension EditReminderView {
             switch reminderType {
             case .oneTime:
                 dataController.createOrUpdateOneTimeReminder(
-                    title: title, time: oneTimeTime, reminder: isEditing ? reminder : nil
+                    title: title,
+                    time: oneTimeTime, message: message.isEmpty ? nil : message,
+                    reminder: isEditing ? reminder : nil
                 )
             case .hourly:
                 print("🔥 interval is \(hourlyDuration)")
                 dataController.createOrUpdateHourlyReminder(
-                    title: title, interval: Int(hourlyDuration), reminder: isEditing ? reminder : nil
+                    title: title,
+                    message: message.isEmpty ? nil : message,
+                    interval: Int(hourlyDuration),
+                    reminder: isEditing ? reminder : nil
                 )
             case .daily:
                 dataController.createOrUpdateDailyReminder(
-                    title: title, times: dailyTimes, reminder: isEditing ? reminder : nil)
+                    title: title,
+                    message: message.isEmpty ? nil : message,
+                    times: dailyTimes,
+                    reminder: isEditing ? reminder : nil
+                )
 
             case .weekly:
                 dataController.createOrUpdateWeeklyReminder(
                     title: title,
+                    message: message.isEmpty ? nil : message,
                     daysAndTimes: weekDays.reduce([Int: [Date]]()) { (dict, weekday) -> [Int: [Date]] in
                         var dict = dict
                         dict[weekday.dayOfTheWeekInt] = weekday.dates

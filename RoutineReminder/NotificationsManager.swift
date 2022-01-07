@@ -29,7 +29,29 @@ final class NotificationManager: ObservableObject {
         }
     }
 
-    // I will keep this as an example but commented out and I will create separate function for each type of reminder
+    private func createContent(title: String, message: String?) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.sound = .default
+        if let message = message {
+            content.body = message
+        }
+        return content
+    }
+
+    func createOneTimeReminder(
+        title: String,
+        date: Date,
+        message: String?,
+        id: String,
+        completion: @escaping (Error?) -> Void
+    ) {
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let content = createContent(title: title, message: message)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: completion)
+    }
 //    func createLocalNotification(title: String, hour: Int, minute: Int, completion: @escaping (Error?) -> Void) {
 //        var dateComponents = DateComponents()
 //        dateComponents.hour = hour

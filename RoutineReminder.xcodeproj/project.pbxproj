@@ -118,6 +118,15 @@
 			path = WeeklyReminderEdit;
 			sourceTree = "<group>";
 		};
+		3B28887F27869C9100760EE2 /* ReminderListRow */ = {
+			isa = PBXGroup;
+			children = (
+				3B0DD7492781200100A1591C /* ReminderRowView.swift */,
+				3B0DD74B2781245500A1591C /* ReminderRowViewModel.swift */,
+			);
+			path = ReminderListRow;
+			sourceTree = "<group>";
+		};
 		3BF7C1F4277E6BA0003CA5F9 = {
 			isa = PBXGroup;
 			children = (
@@ -191,10 +200,9 @@
 		3BF7C21F277E9DD4003CA5F9 /* ReminderList */ = {
 			isa = PBXGroup;
 			children = (
+				3B28887F27869C9100760EE2 /* ReminderListRow */,
 				3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */,
 				3BF7C220277E9E02003CA5F9 /* ReminderListViewModel.swift */,
-				3B0DD7492781200100A1591C /* ReminderRowView.swift */,
-				3B0DD74B2781245500A1591C /* ReminderRowViewModel.swift */,
 			);
 			path = ReminderList;
 			sourceTree = "<group>";

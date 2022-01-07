@@ -9,8 +9,11 @@ import Foundation
 import CoreData
 
 class DataController {
-    private let container: NSPersistentCloudKitContainer
+    private let container: NSPersistentContainer
     var context: NSManagedObjectContext { container.viewContext }
+
+    // to be used in the extension to create notifications
+    var notificationManager = NotificationManager()
 
     static let preview: DataController = {
         let dataController = DataController(inMemory: true)
@@ -18,13 +21,13 @@ class DataController {
         do {
             try dataController.createSampleData()
         } catch {
-            fatalError("Fata error creating preview: \(error.localizedDescription)")
+            fatalError("🔥Fata error creating preview: \(error.localizedDescription)")
         }
         return dataController
     }()
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "Main")
+        container = NSPersistentContainer(name: "Main")
 
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
