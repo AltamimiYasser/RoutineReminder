@@ -36,7 +36,7 @@ struct EditReminderView: View {
                 Section {
                     switch viewModel.reminderType {
                     case .oneTime:
-                        DatePicker("Time", selection: $viewModel.oneTimeTime)
+                        DatePicker("Time", selection: $viewModel.oneTimeTime, in: Date()...)
 
                     case .hourly:
                         Text("How often do you want to be reminded?")
