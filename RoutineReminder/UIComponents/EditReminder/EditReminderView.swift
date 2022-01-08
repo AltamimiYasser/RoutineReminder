@@ -79,5 +79,4 @@ struct EditReminderView: View {
         }
         .navigationTitle(viewModel.isEditing ? "Edit Reminder" : "New Reminder")
     }
-
 }

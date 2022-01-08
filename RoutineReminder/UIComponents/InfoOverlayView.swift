@@ -31,9 +31,3 @@ struct InfoOverlayView: View {
         .padding()
     }
 }
-
-struct InfoOverlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoOverlayView(infoMessage: "", buttonTitle: "", systemImageName: "", action: {})
-    }
-}

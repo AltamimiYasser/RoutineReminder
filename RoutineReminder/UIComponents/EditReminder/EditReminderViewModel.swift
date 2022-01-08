@@ -75,13 +75,11 @@ extension EditReminderView {
             }
         }
 
-        // MARK: - Reacting
-
+        // MARK: User Intent(s)
         func createWeekDay() {
             weekDays.append(WeeklyReminder(dayOfTheWeekInt: 1, dates: []))
         }
 
-        // MARK: User Intent(s)
         func save() {
             switch reminderType {
             case .oneTime:

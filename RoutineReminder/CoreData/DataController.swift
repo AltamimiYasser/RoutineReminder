@@ -12,7 +12,6 @@ class DataController {
     private let container: NSPersistentContainer
     var context: NSManagedObjectContext { container.viewContext }
 
-    // to be used in the extension to create notifications
     let notificationManager = NotificationManager.shared
 
     static let preview: DataController = {
@@ -42,7 +41,6 @@ class DataController {
 
     func save() {
         if context.hasChanges {
-            // reload all notifications
             do {
                 try context.save()
             } catch {

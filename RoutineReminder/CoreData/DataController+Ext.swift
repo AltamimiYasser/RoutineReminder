@@ -118,11 +118,9 @@ extension DataController {
         let oneTime = ReminderTypeOneTime(context: context)
         oneTime.time = time
 
-        // type
         let reminderType = ReminderType(context: context)
         reminderType.oneTime = oneTime
 
-        // delete everything else
         if let reminder = reminder {
             delete(reminderType.hourly, type: reminder.typeData)
             delete(reminderType.daily, type: reminder.typeData)
@@ -142,18 +140,15 @@ extension DataController {
         let hourly = ReminderTypeHourly(context: context)
         hourly.interval = Int64(interval)
 
-        // type
         let reminderType = ReminderType(context: context)
         reminderType.hourly = hourly
 
-        // delete everything else
         if let reminder = reminder {
             delete(reminderType.oneTime, type: reminder.typeData)
             delete(reminderType.daily, type: reminder.typeData)
             delete(reminderType.weekly, type: reminder.typeData)
         }
 
-        // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
     }
 
@@ -165,7 +160,6 @@ extension DataController {
     ) {
         let daily = ReminderTimeDaily(context: context)
 
-        // add times
         for time in times {
             let newTime = Time(context: context)
             newTime.date = time
@@ -175,19 +169,15 @@ extension DataController {
         let reminderType = ReminderType(context: context)
         reminderType.daily = daily
 
-        // delete everything else
         if let reminder = reminder {
             delete(reminderType.oneTime, type: reminder.typeData)
             delete(reminderType.hourly, type: reminder.typeData)
             delete(reminderType.weekly, type: reminder.typeData)
         }
 
-        // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
     }
 
-    // In weekly Reminder we link the dayOfTheWeek field to the times
-    //                                                 [dayOfWeek:[times]]
     func createOrUpdateWeeklyReminder(
         title: String,
         message: String?,
@@ -209,18 +199,15 @@ extension DataController {
             weekly.addToDays(newDay)
         }
 
-        // type
         let reminderType = ReminderType(context: context)
         reminderType.weekly = weekly
 
-        // delete everything else
         if let reminder = reminder {
             delete(reminderType.oneTime, type: reminder.typeData)
             delete(reminderType.hourly, type: reminder.typeData)
             delete(reminderType.daily, type: reminder.typeData)
         }
 
-        // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
     }
 
@@ -237,7 +224,6 @@ extension DataController {
             interval: (2.hoursToSeconds())
         )
 
-        // times for daily
         let time1 = Date()
         let time2 = Date().addingTimeInterval(TimeInterval(14.hoursToSeconds()))
         createOrUpdateDailyReminder(
@@ -246,8 +232,6 @@ extension DataController {
             times: [time1, time2]
         )
 
-        // weekly
-        // Create days
         let times1 = [Date(), Date().addingTimeInterval(TimeInterval(6.hoursToSeconds()))]
         let times2 = [Date(), Date().addingTimeInterval(TimeInterval(12.hoursToSeconds()))]
         createOrUpdateWeeklyReminder(

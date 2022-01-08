@@ -31,7 +31,6 @@ struct ReminderRowView: View {
         }
         .onChange(of: viewModel.isEnabled, perform: viewModel.save)
     }
-
 }
 
 extension ReminderRowView {

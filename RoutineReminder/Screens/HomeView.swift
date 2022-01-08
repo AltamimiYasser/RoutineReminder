@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     private let dataController: DataController
-
     @StateObject private var notificationManager = NotificationManager.shared
 
     init(dataController: DataController) {
@@ -59,10 +58,4 @@ struct HomeView: View {
         }
     }
 
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(dataController: DataController.preview)
-    }
 }

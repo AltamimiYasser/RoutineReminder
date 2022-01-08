@@ -39,7 +39,7 @@ extension Reminder {
         }
 
         if reminderType?.weekly != nil {
-            let days = reminderType?.weekly?.days // Day(s)
+            let days = reminderType?.weekly?.days
 
             var dictDays = [Int: [Date]]()
 

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CustomBackButtonView: ToolbarContent {
-
     let dismiss: DismissAction
     let action: () -> Void
 

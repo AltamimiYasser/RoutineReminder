@@ -9,20 +9,17 @@ import SwiftUI
 
 struct WeeklySingleDayEditView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var weekday: EditReminderView.WeeklyReminder
 
+    @Binding var weekday: EditReminderView.WeeklyReminder
     let save: () -> Void
 
     var body: some View {
-        Self._printChanges()
-        return Form {
+        Form {
             Section {
                 Picker("Weekday", selection: $weekday.dayOfTheWeekInt) {
                     ForEach(1...7, id: \.self) { weekDayInt in
-//                        Text(LocalizedStringKey(Reminder.getWeekDayStr(for: weekDayInt).full)).tag(weekDayInt)
                         Text(Reminder.getWeekDayStr(for: weekDayInt).full).tag(weekDayInt)
                     }
-
                 }
                 .pickerStyle(.menu)
             } header: {
@@ -30,7 +27,6 @@ struct WeeklySingleDayEditView: View {
             }
 
             Section {
-
                 List {
                     ForEach(weekday.dates.indices, id: \.self) { index in
                         DatePicker(

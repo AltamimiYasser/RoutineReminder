@@ -18,6 +18,5 @@ struct SmallCardView: View {
             .background(.purple)
             .cornerRadius(5)
             .shadow(radius: 8)
-
     }
 }

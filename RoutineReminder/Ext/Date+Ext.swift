@@ -10,7 +10,6 @@ import SwiftUI
 
 extension Date {
     func getTimeAndDate() -> (time: LocalizedStringKey, date: LocalizedStringKey) {
-//        var result = (time: LocalizedStringKey = "", date: LocalizedStringKey = "")
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
         let time = LocalizedStringKey(formatter.string(from: self))

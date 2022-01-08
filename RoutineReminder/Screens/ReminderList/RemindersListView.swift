@@ -27,7 +27,6 @@ struct RemindersListView: View {
                     } label: {
                         ReminderRowView(dataController: dataController, reminder: reminder)
                     }
-
                 }
                 .onDelete(perform: viewModel.delete)
                 .padding(.vertical)
@@ -42,7 +41,6 @@ struct RemindersListView: View {
                             .foregroundColor(.blue)
                     }
                 }
-
             }
             .listStyle(.plain)
         }
@@ -72,11 +70,5 @@ struct RemindersListView: View {
             }
         }
         .transition(.slide)
-    }
-}
-
-struct RemindersListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RemindersListView(dataController: DataController.preview)
     }
 }
