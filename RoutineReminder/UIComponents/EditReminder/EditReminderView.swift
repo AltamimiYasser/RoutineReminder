@@ -19,24 +19,29 @@ struct EditReminderView: View {
     var body: some View {
         VStack {
             Form {
-                Section("General") {
+                Section {
                     TextField("Title", text: $viewModel.title)
                     TextField("Description", text: $viewModel.message)
+                } header: {
+                    Text("General")
                 }
 
-                Section("Reminder Type") {
+                Section {
                     Picker("Reminder Type", selection: $viewModel.reminderType) {
                         ForEach(Reminder.TypeOfReminder.allCases, id: \.self) { type in
                             Text(type.rawValue).font(.headline)
                         }
                     }
                     .pickerStyle(.segmented)
+                } header: {
+                    Text("Reminder Type")
                 }
 
                 Section {
                     switch viewModel.reminderType {
                     case .oneTime:
                         DatePicker("Time", selection: $viewModel.oneTimeTime, in: Date()...)
+                            .labelsHidden()
 
                     case .hourly:
                         Text("How often do you want to be reminded?")
@@ -58,7 +63,7 @@ struct EditReminderView: View {
                         )
                     }
                 } header: {
-                    Text("Time(s)")
+                    Text(viewModel.reminderType == .oneTime ? "Time" : "Times")
                 } footer: {
                     Text(viewModel.footerDescription)
                 }
@@ -72,7 +77,7 @@ struct EditReminderView: View {
             }
             CustomBackButtonView(dismiss: dismiss, action: viewModel.save)
         }
-        .navigationTitle("Edit Reminder")
+        .navigationTitle(viewModel.isEditing ? "Edit Reminder" : "New Reminder")
     }
 
 }

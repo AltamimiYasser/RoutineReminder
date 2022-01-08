@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Date {
-    func getTimeAndDate() -> (time: String, date: String) {
-        var result = (time: "", date: "")
+    func getTimeAndDate() -> (time: LocalizedStringKey, date: LocalizedStringKey) {
+//        var result = (time: LocalizedStringKey = "", date: LocalizedStringKey = "")
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
-        result.time = formatter.string(from: self)
+        let time = LocalizedStringKey(formatter.string(from: self))
         formatter.dateFormat = "dd MMMM"
-        result.date = formatter.string(from: self)
-        return result
+        let date = LocalizedStringKey(formatter.string(from: self))
+        return (time, date)
     }
 }

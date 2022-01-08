@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct InfoOverlayView: View {
-    let infoMessage: String
-    let buttonTitle: String
+    let infoMessage: LocalizedStringKey
+    let buttonTitle: LocalizedStringKey
     let systemImageName: String
     let action: () -> Void
 

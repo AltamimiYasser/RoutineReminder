@@ -16,17 +16,20 @@ struct WeeklySingleDayEditView: View {
     var body: some View {
         Self._printChanges()
         return Form {
-            Section("Weekday") {
+            Section {
                 Picker("Weekday", selection: $weekday.dayOfTheWeekInt) {
                     ForEach(1...7, id: \.self) { weekDayInt in
+//                        Text(LocalizedStringKey(Reminder.getWeekDayStr(for: weekDayInt).full)).tag(weekDayInt)
                         Text(Reminder.getWeekDayStr(for: weekDayInt).full).tag(weekDayInt)
                     }
 
                 }
                 .pickerStyle(.menu)
+            } header: {
+                Text("Weekday")
             }
 
-            Section("Time(s)") {
+            Section {
 
                 List {
                     ForEach(weekday.dates.indices, id: \.self) { index in
@@ -44,10 +47,12 @@ struct WeeklySingleDayEditView: View {
                         }
                     }
                 }
+            } header: {
+                Text("Times")
             }
         }
         .animation(.default, value: weekday.dates)
-        .navigationTitle("\(weekday.dayOfTheWeekStr) Reminders")
+        .navigationTitle(weekday.dayOfTheWeekStr)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem {

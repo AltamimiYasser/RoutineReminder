@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmallCardView: View {
-    let string: String
+    let string: LocalizedStringKey
 
     var body: some View {
         Text(string)

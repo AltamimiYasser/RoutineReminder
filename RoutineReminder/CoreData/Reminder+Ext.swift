@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 extension Reminder {
     var reminderTitle: String { title ?? "No name provided"}
@@ -57,7 +58,7 @@ extension Reminder {
             return .oneTime(time: time ?? Date())
     }
 
-    enum TypeOfReminder: String, CaseIterable {
+    enum TypeOfReminder: LocalizedStringKey, CaseIterable {
         case oneTime = "One Time"
         case hourly = "Hourly"
         case daily = "Daily"
@@ -72,22 +73,9 @@ extension Reminder {
         case daily(times: [Date])
         case weekly(days: [Int: [Date]])
 
-        var description: String {
-            switch self {
-            case .oneTime:
-                return "One Time"
-            case .hourly:
-                return "Hourly"
-            case .daily:
-                return "Daily"
-            case .weekly:
-                return "Weekly"
-            }
-        }
-
     }
 
-    static func getWeekDayStr(for dayOfWeek: Int) -> (full: String, short: String) {
+    static func getWeekDayStr(for dayOfWeek: Int) -> (full: LocalizedStringKey, short: LocalizedStringKey) {
             switch dayOfWeek {
             case 1:
                 return ("Sunday", "Sun")

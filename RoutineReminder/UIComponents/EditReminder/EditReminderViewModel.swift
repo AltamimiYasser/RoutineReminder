@@ -126,9 +126,9 @@ extension EditReminderView {
     }
 
     struct WeeklyReminder: Equatable {
-        var dayOfTheWeekStr: String { Reminder.getWeekDayStr(for: dayOfTheWeekInt).full }
+        var dayOfTheWeekStr: LocalizedStringKey { Reminder.getWeekDayStr(for: dayOfTheWeekInt).full }
         var dayOfTheWeekInt: Int
         var dates: [Date]
-        var times: [String] { dates.map({ $0.getTimeAndDate().time }) }
+        var times: [LocalizedStringKey] { dates.map({ $0.getTimeAndDate().time }) }
     }
 }

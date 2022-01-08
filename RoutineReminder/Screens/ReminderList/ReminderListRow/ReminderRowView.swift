@@ -55,7 +55,7 @@ extension ReminderRowView {
                     }
                 } else {
                     getLeftSideView(subTitle: "Repeats every") {
-                        SmallCardView(string: "\(hours) hours and \(minutes)")
+                        SmallCardView(string: "\(hours) hours and \(minutes) minutes")
                     }
                 }
 
@@ -85,7 +85,10 @@ extension ReminderRowView {
         }
     }
 
-    func getLeftSideView<Content: View>(subTitle: String, @ViewBuilder content: () -> Content) -> some View {
+    func getLeftSideView<Content: View>(
+        subTitle: LocalizedStringKey,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
         Group {
             VStack(alignment: .leading) {
                 Text(subTitle)

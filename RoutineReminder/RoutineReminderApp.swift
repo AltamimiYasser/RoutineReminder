@@ -19,15 +19,12 @@ struct RoutineReminderApp: App {
                 HomeView(dataController: dataController)
                     .onChange(of: scenePhase) { newScenePhase in
                         switch newScenePhase {
-
-                        case .background:
-                            print("🔥 going to background")
                         case .inactive:
                             dataController.save()
-                           print("🔥 app inactive")
                         case .active:
                             dataController.reloadAllNotifications()
-                            print("🔥 app is active")
+                        case .background:
+                            break
                         @unknown default:
                             break
                         }

@@ -1,7 +1,141 @@
-/* 
-  Localizable.strings
-  RoutineReminder
+/* No comment provided by engineer. */
+"%lld hours and %lld minutes" = "";
 
-  Created by Yasser Tamimi on 08/01/2022.
-  
-*/
+/* No comment provided by engineer. */
+"Add" = "إضافة";
+
+/* No comment provided by engineer. */
+"Add New Reminder" = "إضافة تذكير جديد";
+
+/* No comment provided by engineer. */
+"Add Reminder" = "إضافة تذكير";
+
+/* No comment provided by engineer. */
+"Add the days of the week here. You can have multiple reminders for a chosen weekday" = "أضف أيام الأسبوع. يمكنك الحصول على أكثر من تنبيه لليوم الواحد.";
+
+/* No comment provided by engineer. */
+"An error occurred. Please make sure to enable notifications in Settings" = "حدث خطأ ما. الرجاء التأكد من تفعيل الأشعارات من الإعدادات";
+
+/* No comment provided by engineer. */
+"Back" = "العودة";
+
+/* No comment provided by engineer. */
+"Daily" = "يومي";
+
+/* No comment provided by engineer. */
+"Description" = "الوصف";
+
+/* No comment provided by engineer. */
+"Edit Reminder" = "تعديل التذكير";
+
+/* No comment provided by engineer. */
+"Enabled" = "مفعل";
+
+/* No comment provided by engineer. */
+"Error" = "خطأ";
+
+/* No comment provided by engineer. */
+"Fri" = "الجمعة";
+
+/* No comment provided by engineer. */
+"Friday" = "الجمعة";
+
+/* No comment provided by engineer. */
+"General" = "عام";
+
+/* No comment provided by engineer. */
+"Hourly" = "مستمر";
+
+/* No comment provided by engineer. */
+"How often do you want to be reminded?" = "ماهي المدة التي ترغب بتكرار التذكير فيها؟";
+
+/* No comment provided by engineer. */
+"Mon" = "الإثنين";
+
+/* No comment provided by engineer. */
+"Monday" = "الإثنين";
+
+/* No comment provided by engineer. */
+"New Reminder" = "تذكير جديد";
+
+/* No comment provided by engineer. */
+"No Reminders Yet" = "لا يوجد تنبيهات";
+
+/* No comment provided by engineer. */
+"One Time" = "مره واحدة";
+
+/* No comment provided by engineer. */
+"One time Reminder" = "تنبيه لمرة واحده";
+
+/* No comment provided by engineer. */
+"Please Enable Notification Permission In Settings" = "الرجاء تفعيل الإشعارات من الإعدادات";
+
+/* No comment provided by engineer. */
+"Reminder Type" = "نوع التنبيه";
+
+/* No comment provided by engineer. */
+"Reminders" = "التنبيهات";
+
+/* No comment provided by engineer. */
+"Repeats every" = "ذكرني كل";
+
+/* No comment provided by engineer. */
+"Repeats everyday at" = "ذكرني يومياً في";
+
+/* No comment provided by engineer. */
+"Repeats weekly every" = "ذكرني إسبوعياً في";
+
+/* No comment provided by engineer. */
+"Sat" = "السبت";
+
+/* No comment provided by engineer. */
+"Saturday" = "السبت";
+
+/* No comment provided by engineer. */
+"Settings" = "الاإعدادات";
+
+/* No comment provided by engineer. */
+"Sun" = "الأحد";
+
+/* No comment provided by engineer. */
+"Sunday" = "الأحد";
+
+/* No comment provided by engineer. */
+"Th" = "الخميس";
+
+/* No comment provided by engineer. */
+"Thursday" = "الخميس";
+
+/* No comment provided by engineer. */
+"Time" = "الوقت";
+
+/* No comment provided by engineer. */
+"Times" = "الأوقات";
+
+/* No comment provided by engineer. */
+"Title" = "العنوان";
+
+/* No comment provided by engineer. */
+"Tu" = "الأربعاء";
+
+/* No comment provided by engineer. */
+"Tuesday" = "الأربعاء";
+
+/* No comment provided by engineer. */
+"Wed" = "الخميس";
+
+/* No comment provided by engineer. */
+"Wednesday" = "الخميس";
+
+/* No comment provided by engineer. */
+"Weekday" = "يوم الأسبوع";
+
+/* No comment provided by engineer. */
+"Weekly" = "أسبوعي";
+
+/* No comment provided by engineer. */
+"You will be reminded based on the specified duration" = "سوف يتم تذكيرك بناء على الفتره المحددة";
+
+/* No comment provided by engineer. */
+"You will be reminded daily on the times you add here" = "سوف يتم تذكيرك يومياً بالأوقات المضافة";
+

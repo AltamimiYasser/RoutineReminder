@@ -24,7 +24,7 @@ struct CustomBackButtonView: ToolbarContent {
                 dismiss()
             } label: {
                 HStack {
-                    Image(systemName: "arrow.left")
+                    Image(systemName: "arrowshape.turn.up.backward")
                     Text("Back")
                 }
             }
