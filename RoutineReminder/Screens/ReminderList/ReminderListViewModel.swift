@@ -41,17 +41,6 @@ extension RemindersListView {
             }
         }
 
-        // for testing
-        func generateSampleData() {
-            dataController.deleteAll()
-            try? dataController.createSampleData()
-        }
-
-        // for testing
-        func deleteAll() {
-            dataController.deleteAll()
-        }
-
         private func getProjects() {
             do {
                 try fetchController.performFetch()
@@ -68,7 +57,7 @@ extension RemindersListView.ViewModel {
     func delete(_ offsets: IndexSet) {
         for offset in offsets {
             let reminder = reminders[offset]
-            dataController.delete(reminder)
+            dataController.delete(reminder, type: reminder.typeData)
         }
         dataController.save()
     }

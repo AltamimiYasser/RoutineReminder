@@ -12,6 +12,11 @@ struct CustomBackButtonView: ToolbarContent {
     let dismiss: DismissAction
     let action: () -> Void
 
+    init(dismiss: DismissAction, action: @escaping () -> Void = {}) {
+        self.dismiss = dismiss
+        self.action = action
+    }
+
     var body: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {

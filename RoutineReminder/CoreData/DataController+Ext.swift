@@ -10,43 +10,70 @@ import CoreData
 
 extension DataController {
 
+    private func createNotification(
+        withTitle title: String,
+        message: String?,
+        type: Reminder.TypeOfReminderData,
+        id: String,
+        completion: @escaping (Error?) -> Void
+    ) {
+        switch type {
+        case .oneTime(time: let time):
+            notificationManager.createOneTimeReminder(
+                title: title,
+                message: message,
+                date: time,
+                id: id,
+                completion: completion
+            )
+        case .hourly(interval: let interval):
+            notificationManager.createHourlyReminder(
+                title: title,
+                message: message,
+                interval: interval,
+                id: id, completion: completion
+            )
+        case .daily(times: let times):
+            notificationManager.createDailyReminder(
+                title: title,
+                message: message,
+                times: times,
+                id: id,
+                completion: completion
+            )
+        case .weekly(days: let days):
+            notificationManager.createWeeklyReminder(
+                title: title,
+                message: message,
+                days: days,
+                id: id,
+                completion: completion
+            )
+        }
+    }
+
     private func createOrUpdateReminder(
         withTitle title: String,
         message: String?,
         type: ReminderType,
         reminder: Reminder? = nil
     ) {
-
         let reminder = reminder ?? Reminder(context: context)
-
+        func completion(error: Error?) {
+            if let error = error { fatalError("🔥 Error creating one time reminder \(error.localizedDescription)") }
+        }
+        var id = ""
+        if (try? context.obtainPermanentIDs(for: [reminder])) != nil {
+            id = reminder.objectID.uriRepresentation().absoluteString } else {
+            fatalError("Error assigning id")
+        }
         reminder.title = title
         reminder.message = message
         reminder.reminderType = type
         reminder.creationDate = Date()
 
-        switch reminder.typeData {
-
-        case .oneTime(time: let time):
-            notificationManager.createOneTimeReminder(
-                title: title,
-                date: time,
-                message: message,
-                id: reminder.objectID.uriRepresentation().absoluteString
-            ) { error in
-                if let error = error {
-                    fatalError("🔥 Error creating one time reminder \(error.localizedDescription)")
-                }
-            }
-
-            // TODO: -
-        case .hourly(interval: let interval):
-            print("create reminder \(interval)")
-        case .daily(times: let times):
-            print("create reminder \(times)")
-        case .weekly(days: let days):
-            print("create reminder \(days)")
-        }
-
+        notificationManager.deleteNotifications(withID: [id], type: reminder.typeData)
+        createNotification(withTitle: title, message: message, type: reminder.typeData, id: id, completion: completion)
         save()
     }
 
@@ -64,9 +91,11 @@ extension DataController {
         reminderType.oneTime = oneTime
 
         // delete everything else
-        delete(reminderType.hourly)
-        delete(reminderType.daily)
-        delete(reminderType.weekly)
+        if let reminder = reminder {
+            delete(reminderType.hourly, type: reminder.typeData)
+            delete(reminderType.daily, type: reminder.typeData)
+            delete(reminderType.weekly, type: reminder.typeData)
+        }
 
         // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
@@ -86,9 +115,11 @@ extension DataController {
         reminderType.hourly = hourly
 
         // delete everything else
-        delete(reminderType.oneTime)
-        delete(reminderType.daily)
-        delete(reminderType.weekly)
+        if let reminder = reminder {
+            delete(reminderType.oneTime, type: reminder.typeData)
+            delete(reminderType.daily, type: reminder.typeData)
+            delete(reminderType.weekly, type: reminder.typeData)
+        }
 
         // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
@@ -113,9 +144,11 @@ extension DataController {
         reminderType.daily = daily
 
         // delete everything else
-        delete(reminderType.oneTime)
-        delete(reminderType.hourly)
-        delete(reminderType.weekly)
+        if let reminder = reminder {
+            delete(reminderType.oneTime, type: reminder.typeData)
+            delete(reminderType.hourly, type: reminder.typeData)
+            delete(reminderType.weekly, type: reminder.typeData)
+        }
 
         // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)
@@ -149,9 +182,11 @@ extension DataController {
         reminderType.weekly = weekly
 
         // delete everything else
-        delete(reminderType.oneTime)
-        delete(reminderType.hourly)
-        delete(reminderType.daily)
+        if let reminder = reminder {
+            delete(reminderType.oneTime, type: reminder.typeData)
+            delete(reminderType.hourly, type: reminder.typeData)
+            delete(reminderType.daily, type: reminder.typeData)
+        }
 
         // reminder
         createOrUpdateReminder(withTitle: title, message: message, type: reminderType, reminder: reminder)

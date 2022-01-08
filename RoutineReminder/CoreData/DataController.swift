@@ -13,7 +13,7 @@ class DataController {
     var context: NSManagedObjectContext { container.viewContext }
 
     // to be used in the extension to create notifications
-    var notificationManager = NotificationManager()
+    let notificationManager = NotificationManager.shared
 
     static let preview: DataController = {
         let dataController = DataController(inMemory: true)
@@ -42,6 +42,7 @@ class DataController {
 
     func save() {
         if context.hasChanges {
+            // reload all notifications
             do {
                 try context.save()
             } catch {
@@ -50,28 +51,12 @@ class DataController {
         }
     }
 
-    func delete(_ object: NSManagedObject?) {
+    func delete(_ object: NSManagedObject?, type: Reminder.TypeOfReminderData) {
         if let object = object {
+            let id = object.objectID.uriRepresentation().absoluteString
+            notificationManager.deleteNotifications(withID: [id], type: type)
             context.delete(object)
+            save()
         }
     }
-
-    // for testing
-    func deleteAll() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Reminder.fetchRequest()
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        _ = try? context.execute(batchDeleteRequest)
-
-//        // we can't simply save() because the batchDeleteRequest runs on the underlying sqlite database
-//        // if we just save(), the data in the UI will not update until we restart the app, but reset() forces
-//        // the viewContext to reload its data from the sqlite database
-        context.reset()
-    }
-
-    // NOT USED YET
-    func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int {
-        (try? context.count(for: fetchRequest)) ?? 0
-    }
-
 }
