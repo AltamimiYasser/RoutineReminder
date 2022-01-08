@@ -21,8 +21,7 @@ extension ReminderRowView {
         }
 
         func save(_: Bool) {
-            reminder.isEnabled = isEnabled
-            dataController.save()
+            dataController.refreshReminder(reminder: reminder, enabled: isEnabled)
         }
     }
 }

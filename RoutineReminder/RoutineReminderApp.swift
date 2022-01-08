@@ -9,24 +9,32 @@ import SwiftUI
 
 @main
 struct RoutineReminderApp: App {
-    private let dataController = DataController()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
+    private let dataController = DataController()
 //    let noti = NotificationManager()
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 HomeView(dataController: dataController)
-                    .onReceive(
-                        NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
-                        perform: save
-                    )
+                    .onChange(of: scenePhase) { newScenePhase in
+                        switch newScenePhase {
+
+                        case .background:
+                            print("🔥 going to background")
+                        case .inactive:
+                            dataController.save()
+                           print("🔥 app inactive")
+                        case .active:
+                            dataController.reloadAllNotifications()
+                            print("🔥 app is active")
+                        @unknown default:
+                            break
+                        }
+                    }
 //                    .onAppear(perform: noti.deleteAllNotifications)
             }
         }
-    }
-
-    private func save(_: Notification) {
-        dataController.save()
     }
 }
 

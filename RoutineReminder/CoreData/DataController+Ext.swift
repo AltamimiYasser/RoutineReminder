@@ -73,8 +73,40 @@ extension DataController {
         reminder.creationDate = Date()
 
         notificationManager.deleteNotifications(withID: [id], type: reminder.typeData)
-        createNotification(withTitle: title, message: message, type: reminder.typeData, id: id, completion: completion)
+        if reminder.isEnabled {
+            createNotification(
+                withTitle: title,
+                message: message,
+                type: reminder.typeData,
+                id: id,
+                completion: completion
+            )
+        }
         save()
+    }
+
+    func refreshReminder(reminder: Reminder, enabled: Bool = true) {
+        let title = reminder.title ?? ""
+        let message = reminder.message
+        let reminderType = ReminderType(context: context)
+        reminderType.oneTime = ReminderTypeOneTime(context: context)
+        reminderType.oneTime?.time = Date()
+        let type = reminder.reminderType ?? reminderType
+        reminder.isEnabled = enabled
+
+        createOrUpdateReminder(withTitle: title, message: message, type: type, reminder: reminder)
+    }
+
+    func reloadAllNotifications() {
+        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Reminder.creationDate, ascending: true)]
+        let reminders = try? context.fetch(fetchRequest)
+
+        if let reminders = reminders {
+            for reminder in reminders {
+                refreshReminder(reminder: reminder)
+            }
+        }
     }
 
     func createOrUpdateOneTimeReminder(
