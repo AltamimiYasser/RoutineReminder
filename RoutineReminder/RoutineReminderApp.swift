@@ -12,7 +12,6 @@ struct RoutineReminderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     private let dataController = DataController()
-//    let noti = NotificationManager()
     var body: some Scene {
         WindowGroup {
             NavigationView {
@@ -29,7 +28,6 @@ struct RoutineReminderApp: App {
                             break
                         }
                     }
-//                    .onAppear(perform: noti.deleteAllNotifications)
             }
         }
     }

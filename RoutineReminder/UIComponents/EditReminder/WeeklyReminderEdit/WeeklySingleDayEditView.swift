@@ -54,7 +54,7 @@ struct WeeklySingleDayEditView: View {
             ToolbarItem {
                 EditButton()
             }
-            CustomBackButtonView(dismiss: dismiss)
+            CustomBackButtonView(dismiss: dismiss, text: "Back")
         }
     }
 

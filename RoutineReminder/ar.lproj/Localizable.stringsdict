@@ -36,7 +36,7 @@
 			<string>ساعة</string>
 			<key>two</key>
 			<string>ساعتين</string>
-			<key>many</key>
+			<key>other</key>
 			<string>%lld ساعات</string>
 		</dict>
 		<key>minutes</key>

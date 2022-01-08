@@ -75,7 +75,15 @@ struct EditReminderView: View {
             ToolbarItem {
                 EditButton()
             }
-            CustomBackButtonView(dismiss: dismiss, action: viewModel.save)
+            CustomBackButtonView(dismiss: dismiss, text: "Save", action: viewModel.save)
+            ToolbarItem(placement: .cancellationAction) {
+                Button(role: .cancel) {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                }
+
+            }
         }
         .navigationTitle(viewModel.isEditing ? "Edit Reminder" : "New Reminder")
     }

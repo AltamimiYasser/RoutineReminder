@@ -10,10 +10,12 @@ import SwiftUI
 struct CustomBackButtonView: ToolbarContent {
     let dismiss: DismissAction
     let action: () -> Void
+    let text: LocalizedStringKey
 
-    init(dismiss: DismissAction, action: @escaping () -> Void = {}) {
+    init(dismiss: DismissAction, text: LocalizedStringKey, action: @escaping () -> Void = {}) {
         self.dismiss = dismiss
         self.action = action
+        self.text = text
     }
 
     var body: some ToolbarContent {
@@ -24,7 +26,7 @@ struct CustomBackButtonView: ToolbarContent {
             } label: {
                 HStack {
                     Image(systemName: "arrowshape.turn.up.backward")
-                    Text("Back")
+                    Text(text)
                 }
             }
         }
