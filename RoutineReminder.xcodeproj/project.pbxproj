@@ -16,6 +16,7 @@
 		3B0DD74E2781381F00A1591C /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74D2781381F00A1591C /* Date+Ext.swift */; };
 		3B0DD75027815EEC00A1591C /* EditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD74F27815EEC00A1591C /* EditReminderView.swift */; };
 		3B0DD75327815F0900A1591C /* EditReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */; };
+		3B21090E278A89D700300ED1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B210910278A89D700300ED1 /* InfoPlist.strings */; };
 		3B288854278336FC00760EE2 /* SmallCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B288853278336FC00760EE2 /* SmallCardView.swift */; };
 		3B2888582785014400760EE2 /* DailyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888572785014400760EE2 /* DailyReminderEditView.swift */; };
 		3B28885A2785062400760EE2 /* WeeklyReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */; };
@@ -47,6 +48,9 @@
 		3B0DD75227815F0900A1591C /* EditReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderViewModel.swift; sourceTree = "<group>"; };
 		3B0DD7542782D11500A1591C /* RoutineReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RoutineReminder.entitlements; sourceTree = "<group>"; };
 		3B2108F62789613D00300ED1 /* ar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; name = ar; path = ar.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		3B21090F278A89D700300ED1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B210911278A8A0A00300ED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B210912278A8A0B00300ED1 /* ar */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B288853278336FC00760EE2 /* SmallCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCardView.swift; sourceTree = "<group>"; };
 		3B2888572785014400760EE2 /* DailyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderEditView.swift; sourceTree = "<group>"; };
 		3B2888592785062400760EE2 /* WeeklyReminderEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReminderEditView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		3BF7C1F4277E6BA0003CA5F9 = {
 			isa = PBXGroup;
 			children = (
+				3B210910278A89D700300ED1 /* InfoPlist.strings */,
 				3BF7C1FF277E6BA0003CA5F9 /* RoutineReminder */,
 				3BF7C1FE277E6BA0003CA5F9 /* Products */,
 				3BF7C212277E77C6003CA5F9 /* Frameworks */,
@@ -274,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF7C208277E6BA1003CA5F9 /* Preview Assets.xcassets in Resources */,
+				3B21090E278A89D700300ED1 /* InfoPlist.strings in Resources */,
 				3B28888227892DBF00760EE2 /* Localizable.strings in Resources */,
 				3B28888F27895C7A00760EE2 /* Localizable.stringsdict in Resources */,
 				3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */,
@@ -335,6 +341,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3B210910278A89D700300ED1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B21090F278A89D700300ED1 /* Base */,
+				3B210911278A8A0A00300ED1 /* en */,
+				3B210912278A8A0B00300ED1 /* ar */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3B28888427892DBF00760EE2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -490,6 +506,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -501,7 +518,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -521,6 +538,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -532,7 +550,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
