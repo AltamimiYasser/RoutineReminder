@@ -29,7 +29,6 @@
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
 		3BF7C208277E6BA1003CA5F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C207277E6BA1003CA5F9 /* Preview Assets.xcassets */; };
 		3BF7C210277E71FF003CA5F9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C20F277E71FF003CA5F9 /* DataController.swift */; };
-		3BF7C214277E77C6003CA5F9 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF7C213277E77C6003CA5F9 /* CloudKit.framework */; };
 		3BF7C219277E7C3F003CA5F9 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C217277E7C3F003CA5F9 /* Main.xcdatamodeld */; };
 		3BF7C21B277E86D2003CA5F9 /* Reminder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C21A277E86D2003CA5F9 /* Reminder+Ext.swift */; };
 		3BF7C21E277E9384003CA5F9 /* DataController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C21D277E9384003CA5F9 /* DataController+Ext.swift */; };
@@ -76,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BF7C214277E77C6003CA5F9 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +501,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -534,7 +532,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
