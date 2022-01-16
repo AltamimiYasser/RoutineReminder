@@ -35,7 +35,8 @@ final class NotificationManager: ObservableObject {
     private func createContent(title: String, message: String?) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = title
-        content.sound = .default
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "noti.caf"))
+
         if let message = message {
             content.body = message
         }

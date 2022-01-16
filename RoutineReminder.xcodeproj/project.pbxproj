@@ -25,6 +25,7 @@
 		3B28887D27868ED100760EE2 /* CustomBackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B28887C27868ED100760EE2 /* CustomBackButtonView.swift */; };
 		3B28888227892DBF00760EE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B28888427892DBF00760EE2 /* Localizable.strings */; };
 		3B28888F27895C7A00760EE2 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 3B28889127895C7A00760EE2 /* Localizable.stringsdict */; };
+		3B3546EE2794814000ABA1E6 /* noti.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3B3546ED2794814000ABA1E6 /* noti.caf */; };
 		3BF7C201277E6BA0003CA5F9 /* RoutineReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */; };
 		3BF7C203277E6BA0003CA5F9 /* RemindersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */; };
 		3BF7C205277E6BA1003CA5F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7C204277E6BA1003CA5F9 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		3B28888327892DBF00760EE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B28888527892E0700760EE2 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B28889027895C7A00760EE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		3B3546ED2794814000ABA1E6 /* noti.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = noti.caf; sourceTree = "<group>"; };
 		3BF7C1FD277E6BA0003CA5F9 /* RoutineReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutineReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF7C200277E6BA0003CA5F9 /* RoutineReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineReminderApp.swift; sourceTree = "<group>"; };
 		3BF7C202277E6BA0003CA5F9 /* RemindersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersListView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		3BF7C1FF277E6BA0003CA5F9 /* RoutineReminder */ = {
 			isa = PBXGroup;
 			children = (
+				3B3546ED2794814000ABA1E6 /* noti.caf */,
 				3B28889127895C7A00760EE2 /* Localizable.stringsdict */,
 				3B0DD7542782D11500A1591C /* RoutineReminder.entitlements */,
 				3B0DD74427810EB500A1591C /* UIComponents */,
@@ -278,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B3546EE2794814000ABA1E6 /* noti.caf in Resources */,
 				3BF7C208277E6BA1003CA5F9 /* Preview Assets.xcassets in Resources */,
 				3B21090E278A89D700300ED1 /* InfoPlist.strings in Resources */,
 				3B28888227892DBF00760EE2 /* Localizable.strings in Resources */,
