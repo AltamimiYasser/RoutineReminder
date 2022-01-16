@@ -32,6 +32,8 @@ class DataController {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
 
+        let description = container.persistentStoreDescriptions.first
+        description?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Error loading stores. \(error)")
