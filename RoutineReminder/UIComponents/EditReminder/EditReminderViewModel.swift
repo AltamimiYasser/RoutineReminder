@@ -39,6 +39,12 @@ extension EditReminderView {
             }
         }
 
+        var editButtonEnabled: Bool {
+            if reminderType == .daily && !dailyTimes.isEmpty { return true }
+            if reminderType == .weekly && !weekDays.isEmpty { return true }
+            return false
+        }
+
         init(dataController: DataController, reminder: Reminder? = nil) {
             self.dataController = dataController
             if let reminder = reminder {

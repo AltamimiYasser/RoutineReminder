@@ -73,7 +73,9 @@ struct EditReminderView: View {
         .padding(.bottom)
         .toolbar {
             ToolbarItem {
-                EditButton()
+                if viewModel.editButtonEnabled {
+                    EditButton()
+                }
             }
             CustomBackButtonView(dismiss: dismiss, text: "Save", action: viewModel.save)
             ToolbarItem(placement: .cancellationAction) {
