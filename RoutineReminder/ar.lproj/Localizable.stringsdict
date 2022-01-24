@@ -25,7 +25,7 @@
 	<key>%lld hours and %lld minutes</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@hours@ و %#@minutes@</string>
+		<string>%#@hours@ %#@minutes@</string>
 		<key>hours</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
@@ -45,14 +45,16 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
+            <key>zero</key>
+            <string></string>
 			<key>one</key>
-			<string>دقيقة</string>
+			<string>و دقيقة</string>
 			<key>two</key>
-			<string>دقيقتين</string>
+			<string>و دقيقتين</string>
             <key>few</key>
-            <string>%lld دقائق</string>
+            <string>و %lld دقائق</string>
 			<key>many</key>
-			<string>%lld دقيقة</string>
+			<string>و %lld دقيقة</string>
 		</dict>
 	</dict>
 </dict>
