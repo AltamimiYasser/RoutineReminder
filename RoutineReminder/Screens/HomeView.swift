@@ -21,6 +21,7 @@ struct HomeView: View {
             case .authorized:
                 RemindersListView(dataController: dataController)
             case .denied:
+                RemindersListView(dataController: dataController, showNotificationSheet: true)
                 InfoOverlayView(
                     infoMessage: "Please Enable Notification Permission In Settings",
                     buttonTitle: "Settings",

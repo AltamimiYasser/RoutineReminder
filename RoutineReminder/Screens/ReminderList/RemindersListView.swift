@@ -10,12 +10,14 @@ import SwiftUI
 struct RemindersListView: View {
     @StateObject private var viewModel: ViewModel
     @State private var showNewReminderSheet = false
+    @State private var showEnableNotificationSheet = false
     private let dataController: DataController
 
-    init(dataController: DataController) {
+    init(dataController: DataController, showNotificationSheet: Bool = false) {
         self.dataController = dataController
         let viewModel = ViewModel(dataController: dataController)
         _viewModel = .init(wrappedValue: viewModel)
+        _showEnableNotificationSheet = .init(initialValue: showNotificationSheet)
     }
 
     var body: some View {
@@ -43,6 +45,17 @@ struct RemindersListView: View {
                 }
             }
             .listStyle(.plain)
+            .sheet(isPresented: $showEnableNotificationSheet, onDismiss: nil) {
+                NavigationView {
+                    InfoOverlayView(
+                        infoMessage: "Please Enable Notification Permission In Settings",
+                        buttonTitle: "Settings",
+                        systemImageName: "gear",
+                        action: openSettings,
+                        withXMark: true
+                    )
+                }
+            }
         }
         .toolbar {
             if !viewModel.reminders.isEmpty {
@@ -70,5 +83,11 @@ struct RemindersListView: View {
             }
         }
         .transition(.slide)
+    }
+
+    private func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }

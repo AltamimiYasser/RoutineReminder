@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct InfoOverlayView: View {
+    @Environment(\.dismiss) private var dismiss
     let infoMessage: LocalizedStringKey
     let buttonTitle: LocalizedStringKey
     let systemImageName: String
     let action: () -> Void
+    var withXMark = false
 
     var body: some View {
         VStack {
@@ -29,5 +31,17 @@ struct InfoOverlayView: View {
             .cornerRadius(5)
         }
         .padding()
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                if withXMark {
+                    Button(role: .cancel) {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+
+                }
+            }
+        }
     }
 }

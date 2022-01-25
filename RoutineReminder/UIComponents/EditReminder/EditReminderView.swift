@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditReminderView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ViewModel
 
     init(dataController: DataController, reminder: Reminder? = nil) {
